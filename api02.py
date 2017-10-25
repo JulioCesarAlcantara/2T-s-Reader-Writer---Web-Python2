@@ -213,7 +213,7 @@ def thingsTableReader():
 
     if loca_id != "0":
 
-        print "Inserir funcao de leitura"
+        print ("Inserir funcao de leitura")
         txt = "Waiting for Reading ..."
     else:
         msg = "Please, Select a Location to Read."
