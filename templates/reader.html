@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/sidenav.css')}}">
+
+    <title>2Ts Reader/Writer</title>
+</head>
+<body>
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+             <a class="navbar-brand"><span><h1> 2Ts Reader/Writer </h1></span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <br><a href=""><h4>About</h4></a>
+                </li>
+            </ul>
+        </div>
+        <br>
+    </div>
+</div>
+
+<div class="container" align="center">
+        <div class="row text-center">
+            <h1><b>Reader</b></h1>
+        </div>
+        <br>
+
+        <form action="readerLoc" method="POST">
+            <div class="container">
+                <div class="row-fluid">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="select selectpicker ">
+                          <select autofocus  required name="location1" class="selectpicker form-control account-wall">
+                            <option value="0">Location ...</option>
+                            {%for loc in locations%}
+                            <option value="{{loc.loca_id}}">{{loc.loca_room}}</option>
+                            {%endfor%}
+                          </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            {%if message is defined%}
+            <div class=' alert alert-warning'><strong>Warning!</strong> {{message}}</div>
+            {%endif%}
+
+            {%if texto is defined%}
+            <div class=' alert alert-info alert-dismissable fade in'><strong>Info!</strong> {{texto}}</div>
+            {%endif%}
+
+
+            <br>
+            <button class="btn btn-lg btn-primary col-md-4 col-md-offset-4 text-center" type="submit">Reader</button><br>
+            <br><br><br>
+        </form>
+
+        <form action="tableRead" method="POST">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                          <table name="" id="mytable" class="table table-bordred table-striped">
+                               {% if thingsdata is defined%}
+                               <thead>
+                                   <th><center>Code</center></th>
+                                   <th><center>Name</center></th>
+                                   <th><center>Location</center></th>
+                               </thead>
+                               <tbody>
+                                    {%for things in thingsdata%}
+                                    <tr align="center">
+                                        <td>{{things.nr_things1}}</td>
+                                        <td>{{things.description}}</td>
+                                        <td>{{things.location.loca_room}}</td>
+                                    </tr>
+                                    {%endfor%}
+                               {%endif%}
+                                </tbody>
+                          </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col col-md-offset">
+                            <a href="/inicial" class="btn btn-lg btn-danger col-md-2 text-center align-left glyphicon glyphicon-arrow-left" role="button"> Back</a>
+                        </div>
+                        <div class="col col-md-offset-8">
+                            <button type="submit" class="btn btn-lg btn-success col-md-6 align-right glyphicon glyphicon-ok"> Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+</div>
+</body>
+</html>

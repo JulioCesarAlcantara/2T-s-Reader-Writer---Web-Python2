@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+    <title>Tracking Things Server</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/sidenav.css')}}">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="sidenav">
+        <h1>Menu</h1>
+        <h3>Manage</h3>
+        <form method="POST" action="things">
+            <button type="submit">Things</button>
+        </form>
+        <form method="POST" action="users">
+            <button type="submit">Users</button>
+        </form>
+        <form method="POST" action="locations">
+            <button type="submit">Locations</button>
+        </form>
+
+
+        <h3>About</h3>
+        <form method="POST" action="about">
+            <button type="submit">About us</button>
+        </form>
+
+        <h3>Exit</h3>
+        <form method="POST" action="quit">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+
+    <div class="main">
+        {% if message is defined %}
+        <div class='alert alert-danger'>{{message}}</div>
+        {% endif %}
+        <h1> User Manager </h1>
+
+        <fieldset>
+            <legend>Search</legend>
+
+            <form class="form-horizontal" action="findUser" method="post">
+                <div class="form-group">
+                    <label for="id">*Users: </label>
+                    <select class="form-control" id="id" name="id">
+                        {%for user in users%}
+                        <option value="{{user.id}}">{{user.name}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-success" type="submit">Find</button>
+                </div>
+
+            </form>
+        </fieldset>
+
+        <fieldset>
+            {% if user1 is defined %}
+            <legend>Edit</legend>
+            <form class="form-horizontal" method="POST" action="editUser">
+                {% else %}
+                <legend>Add</legend>
+                <form class="form-horizontal" method="POST" action="adduser">
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label for="name">*Nome: </label>
+                        {% if user1 is defined %}
+                        <input class="form-control" required type="text" id="name" name="name" value="{{user1.name}}">
+                        {% else %}
+                        <input class="form-control" required type="text" id="name" name="name">
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">*Email: </label>
+                        {% if user1 is defined %}
+                        <input class="form-control" required type="text" id="email" name="email"
+                               value="{{user1.email}}">
+                        {% else %}
+                        <input class="form-control" required type="text" id="email" name="email">
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">*Password: </label>
+                        <input class="form-control" required type="password" id="password" name="password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="permission">*Access permission: </label>
+                        {% if user1 is defined %}
+                        <input required class="form-control" type="number" id="permission" name="permission"
+                               value="{{user1.permission}}">
+                        {% else %}
+                        <input required class="form-control" type="number" id="permission" name="permission">
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        {% if user1 is defined %}
+                        <input type="hidden" value="{{user1.id}}" name="id1">
+                        <button class="btn btn-info" type="submit">Update</button>
+                        {% else %}
+                        <button class="btn btn-success" type="submit">Save</button>
+                        {% endif %}
+                        {% if user1 is defined %}
+                    </div>
+                </form>
+                {% else %}
+            </form>
+            {% endif %}
+        </fieldset>
+
+        <form class="form-horizontal" action="voltar" method="post">
+            <div class="form-group">
+                <button class="btn btn-danger" type="submit">Back</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

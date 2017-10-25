@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <title>2Ts Reader/Writer</title>
+
+</head>
+<body>
+    <form  class="form-horizontal" method="post" action="/post_login">
+        <div class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                     <a class="navbar-brand"><span><h1> 2Ts Reader/Writer </h1></span></a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <br><a href="">About</a>
+                        </li>
+                    </ul>
+                </div>
+                <br>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3 col-md-offset-4">
+                    <h1 class="text-center login-title">Sign in</h1><br>
+                    <div class="account-wall">
+                        <form action="login" method="post" class="form-signin">
+                            <input type="hidden" name="cmd" value="login"/>
+                            <input type="text" class="form-control" placeholder="Email" name="email" required autofocus><br>
+                            <input type="password" class="form-control" placeholder="Password" name="password" required><br>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button><br>
+                        </form>
+                    </div>
+                    {%if message is defined%}
+                    <div class=' alert alert-warning alert-dismissable fade in'><strong>Warning!</strong> {{message}}</div>
+                    {%endif%}
+
+                </div>
+            </div>
+        </div>
+    </form>
+    <script src="{{url_for('static', filename='styles/message.js')}}"></script>
+</body>
+</html>
