@@ -1,5 +1,6 @@
 import pymysql
 
+
 class Connection(object):
     #__server = 'sql10.freemysqlhosting.net'
     __server = 'localhost'
@@ -11,7 +12,8 @@ class Connection(object):
     __database = 'patrimonioIFG'
 
     def __init__(self):
-        self.db = pymysql.connect(host = Connection.__server, port = 3306, user = Connection.__user, passwd = Connection.__password, db = Connection.__database)
+        self.db = pymysql.connect(host = Connection.__server, port = 3306, user = Connection.__user, passwd = Connection.__password, db = Connection.__database, charset='utf8',
+use_unicode=True)
         self.cursor = self.db.cursor()
         print('Connected in database '+Connection.__database)
 

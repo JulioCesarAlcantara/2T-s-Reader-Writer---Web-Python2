@@ -192,6 +192,8 @@ class Things(ThingsModel):
                 return False
             listThings = []
             for data in cursor.fetchall():
+                print data[9]
+
                 location = LocationModel(loca_id=str("0" if data[8] == None else data[8]),
                                          loca_room=str("" if data[9] == None else data[9]))
                 location_current = LocationModel(loca_id=str("0" if data[12] == None else data[12]),

@@ -3,8 +3,11 @@
 # from builtins import print
 #!-*- conding: utf8 -*-
 
+import sys
 
 from pip.utils import encoding
+#encoding: utf-8
+
 #encoding: utf-8
 from flask import jsonify, request, Flask, render_template, url_for, session, g
 import json
@@ -23,6 +26,8 @@ from Things import Things
 
 from User import User
 
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 def para_dict(obj):
     # Se for um objeto, transforma num dict
@@ -120,6 +125,8 @@ def thingsTable():
 
     if loca_id == "0" and status == "1":
         thingsdata = things.search_all_things_actives()
+        for a in thingsdata:
+            print a.description
 
         if thingsdata == False:
             msg = "Object not found."

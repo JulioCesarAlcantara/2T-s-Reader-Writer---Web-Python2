@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+    <meta charset="UTF-8"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
@@ -47,8 +48,7 @@
                           <select autofocus  required name="location" class="selectpicker form-control account-wall">
                             <option value="0">Locations ...</option>
                             {%for loc in location%}
-                              {loc}
-                            <option value="{loc.loc_id}">{loc.loca_room}</option>
+                            <option value="{{loc.loca_id}}">{{loc.loca_room}}</option>
                             {%endfor%}
                           </select>
                         </div>
@@ -83,7 +83,7 @@
                 <div class="col-md-12">
                     <div class="table-responsive">
                       <table id="mytable" class="table table-bordred table-striped">
-                           {% if thingsdata is defined%}
+                           {%if thingsdata is defined%}
                            <thead>
                                <th><center>Code</center></th>
                                <th><center>Name</center></th>
@@ -94,8 +94,8 @@
                                 {%for things in thingsdata%}
                                 <tr align="center">
                                     <td>{{things.nr_things1}}</td>
-                                    <td>{{things[description]}}</td>
-                                    <td>{things.location.loca_room}</td>
+                                    <td>{{things.description}}</td>
+                                    <td>{{things.location.loca_room}}</td>
                                     <td>{{things.tag_activated}}</td>
                                 </tr>
                                 {%endfor%}
