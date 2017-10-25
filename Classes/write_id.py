@@ -1,8 +1,10 @@
 # -*- coding: utf8 -*-
 
  GPIO
-import MFRC522
 import signal
+
+import MFRC522
+
 
 class writerTag():
 

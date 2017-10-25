@@ -7,15 +7,18 @@ import signal
 
 class write_id2():
 
-	def __init__(self):
+	def __init__(self, codigoThings):
+
+                texto = str(codigoThings)
+
                 continue_reading = True
-		# Hook the SIGINT
+		        # Hook the SIGINT
                 signal.signal(signal.SIGINT, self.end_read)
 
-		# Create an object of the class MFRC522
+		        # Create an object of the class MFRC522
                 MIFAREReader = MFRC522.MFRC522()
 
-		# This loop keeps checking for chips. If one is near it will get the UID and authenticate
+		        # This loop keeps checking for chips. If one is near it will get the UID and authenticate
                 while continue_reading:
                     
                     # Scan for cards    
@@ -51,7 +54,7 @@ class write_id2():
                         if status == MIFAREReader.MI_OK:
 
                             # Variable for the data to write
-                            texto = '88670'
+
                                 #print("------texto------")
                                 #print(len(texto))
                             

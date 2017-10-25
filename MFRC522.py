@@ -352,29 +352,29 @@ class MFRC522:
       print (dados)
 #      return dados
 
-      try: 
+      # try:
 	
-	sock1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	# sock1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	#sock2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	print ("Aqui 1")
-	server1 = ("192.168.1.102", 8000)
-	print("Aqui 2")
+	# print ("Aqui 1")
+	# server1 = ("192.168.1.102", 8000)
+	# print("Aqui 2")
 	#server2 = ("192.168.1.100", 8001)
-	sock1.connect(server1)
-	print("aqui 3")
+	# sock1.connect(server1)
+	# print("aqui 3")
 	#sock2.connect(server2)
 	#msg = raw_input()
 	#while True:
 #	for x in dados:
-	sock1.send(dados)
+	# sock1.send(dados)
 		#sock1.close()
 	#	msg = raw_input()
 
 #	print("aqui 4")
 	#sock2.send(marshal.dumps(str(dados)))
 	#sock1.close()
-      except socket.error:
-	print("Conexao recusada")
+      # except socket.error:
+	# print("Conexao recusada")
 
 
 

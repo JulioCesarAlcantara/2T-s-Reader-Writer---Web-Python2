@@ -25,6 +25,7 @@ import os
 from Things import Things
 
 from User import User
+from write_id2 import write_id2
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -196,14 +197,14 @@ def synchronize():
 
     return render_template ('/synchronize.html', things=list)
 
-# @app.route('/writeTag', methods=['POST'])
-# def writerInTag():
-#
-#     codigoThing = request.form['radioSelected']
-#
-#     writerTag(str(codigoThing))
-#
-#     return render_template ('/writer.html')
+@app.route('/writeTag', methods=['POST'])
+def writerInTag():
+
+    codigoThing = request.form['radioSelected']
+
+    write_id2(str(codigoThing))
+
+    return render_template ('/writer.html')
 
 @app.route('/readerLoc', methods=['POST'])
 def thingsTableReader():
