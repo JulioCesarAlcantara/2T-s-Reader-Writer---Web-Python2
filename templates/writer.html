@@ -58,11 +58,11 @@
             </div>
             <br>
             {%if message is defined%}
-            <div class=' alert alert-warning'><strong>Warning!</strong> {{message}}</div>
+            <div class=' alert alert-warning'><strong>Warning!</strong> {message}</div>
             {%endif%}
 
             {%if texto is defined%}
-            <div class=' alert alert-info alert-dismissable fade in'><strong>Info!</strong> {{texto}}</div>
+            <div class=' alert alert-info alert-dismissable fade in'><strong>Info!</strong> {texto}</div>
             {%endif%}
 
 
@@ -86,9 +86,9 @@
                                    <tbody>
                                         {%for things in dado%}
                                         <tr align="center">
-                                            <td><input name="radioSelected" type="radio" class="checkthis" value="{{things.nr_things1}}" /></td>
+                                            <td><input name="radioSelected" type="radio" class="checkthis" value="{things.nr_things1}" /></td>
                                             <td>{{things.nr_things1}}</td>
-                                            <td>{{things.description}}</td>
+                                            <td>{things.description}</td>
                                             <td>{{things.location.loca_room}}</td>
                                         </tr>
                                         {%endfor%}

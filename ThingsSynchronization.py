@@ -1,6 +1,6 @@
-from DatabaseManager.Connection import Connection
 from ThingsManager.Things import Things
-from ThingsManager.ThingsXLocation import ThingsXLocation
+
+from ThingsXLocation import ThingsXLocation
 
 
 class ThingsSynchronization(object):

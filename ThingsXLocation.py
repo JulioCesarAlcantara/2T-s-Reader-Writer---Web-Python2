@@ -1,7 +1,7 @@
 from DatabaseManager.Connection import Connection
 from ThingsManager.LocationModel import LocationModel
-from ThingsManager.ThingsModel import ThingsModel
-from ThingsManager.ThingsXLocationModel import ThingsXLocationModel
+
+from ThingsXLocationModel import ThingsXLocationModel
 
 
 class ThingsXLocation(object):

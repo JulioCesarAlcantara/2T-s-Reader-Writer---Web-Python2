@@ -47,7 +47,8 @@
                           <select autofocus  required name="location" class="selectpicker form-control account-wall">
                             <option value="0">Locations ...</option>
                             {%for loc in location%}
-                            <option value="{{loc.loca_id}}">{{loc.loca_room}}</option>
+                              {loc}
+                            <option value="{loc.loc_id}">{loc.loca_room}</option>
                             {%endfor%}
                           </select>
                         </div>
@@ -93,8 +94,8 @@
                                 {%for things in thingsdata%}
                                 <tr align="center">
                                     <td>{{things.nr_things1}}</td>
-                                    <td>{{things.description}}</td>
-                                    <td>{{things.location.loca_room}}</td>
+                                    <td>{{things[description]}}</td>
+                                    <td>{things.location.loca_room}</td>
                                     <td>{{things.tag_activated}}</td>
                                 </tr>
                                 {%endfor%}
