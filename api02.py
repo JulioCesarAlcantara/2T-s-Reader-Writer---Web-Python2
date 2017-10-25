@@ -126,8 +126,6 @@ def thingsTable():
 
     if loca_id == "0" and status == "1":
         thingsdata = things.search_all_things_actives()
-        for a in thingsdata:
-            print a.description
 
         if thingsdata == False:
             msg = "Object not found."
