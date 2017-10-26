@@ -5,6 +5,9 @@ import RPi.GPIO as GPIO
 import spi
 import signal
 import time
+
+from flask import render_template
+
 import convertendo2
 import socket
 import marshal
@@ -422,7 +425,7 @@ class MFRC522:
             return False
         if status == self.MI_OK:
             print "Data written"
-            return True
+            return render_template ('/writer.html', msg="Tag Activated Successfully !!")
 
   def MFRC522_DumpClassic1K(self, key, uid):
     i = 0
