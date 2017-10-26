@@ -207,7 +207,7 @@ def writerInTag():
 
     processo = subprocess.call (["sudo python /home/pi/Documentos/python2/2T-s-Reader-Writer---Web-Python2/write_id.py", "26"], shell=True)
 
-    print "Resultado" + processo
+    print "Resultado" + str(processo)
 
     return render_template ('/writer.html', msg="sucesso")
 
