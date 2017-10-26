@@ -218,7 +218,7 @@ def writerInTag():
     # except Exception as e:
     #     return render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
 
-    import subprocess
+    # import subprocess
 
     # processo = subprocess.call (["sudo python /home/pi/Documentos/python2/2T-s-Reader-Writer---Web-Python2/write_id.py", "26"], shell=True)
 
