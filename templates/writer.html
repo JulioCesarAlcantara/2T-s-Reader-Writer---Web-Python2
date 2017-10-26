@@ -107,8 +107,8 @@
                             <button type="submit" class="btn btn-lg btn-success col-md-4 align-right glyphicon glyphicon-ok"> Active</button>
                         </div>
 
-                        {%if texto is msg%}
-                        <div class=' alert alert-info alert-dismissable fade in'><strong>Info!</strong>{{texto}}</div>
+                        {%if msg is defined%}
+                        <div class=' alert alert-info alert-dismissable fade in'><strong>Info!</strong>{{msg}}</div>
                         {%endif%}
                     </div>
                 </div>
