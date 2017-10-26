@@ -204,15 +204,17 @@ def synchronize():
 def writerInTag():
     numero = request.form['radioSelected']
 
-    things = Things ()
-    location = things.search_locations ()
+    try:
+        things = Things ()
+        location = things.search_locations ()
 
-    # return render_template('/writer.html', tagAtiv = 'Aproxime a etiqueta para active')
-    tag = start (str(numero))
+        # return render_template('/writer.html', tagAtiv = 'Aproxime a etiqueta para active')
+        start (str(numero))
 
-    if tag == True:
+        # if tag == True:
         render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
-    else:
+        # else:
+    except Exception as e:
         return render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
 
     import subprocess
