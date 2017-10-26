@@ -23,14 +23,14 @@ def end_read(signal,frame):
 def start(string):
     texto = string
     things = Things ()
+    location = things.search_locations ()
+    #
+    # dados = []
+    # dados.append(things.search_things_by_num1(texto))
 
-    dados = []
-    dados.append(things.search_things_by_num1(texto))
-    location = things.search_locations()
+    #
+    # render_template ('/writer.html', tagAtiv="Tag Activated Successfully !!")
 
-    render_template ('/writer.html', tagAtiv="Tag Activated Successfully !!", locations=location, dado=dados)
-
-    import signal
     continue_reading = True
     # Hook the SIGINT
     # signal.signal(signal.SIGINT, end_read)
@@ -100,9 +100,12 @@ def start(string):
                 write = MIFAREReader.MFRC522_Write(bloco1, data1)
                 # print ("\n")
                 if write == True:
+                    MIFAREReader.MFRC522_StopCrypto1 ()
                     render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
                 else:
+                    MIFAREReader.MFRC522_StopCrypto1 ()
                     render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
+
                 # print ("It now looks like this:")
                 # Check to see if it was written
                 # MIFAREReader.MFRC522_Read(bloco1)

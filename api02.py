@@ -203,6 +203,8 @@ def synchronize():
 @app.route('/writeTag', methods=['POST'])
 def writerInTag():
     numero = request.form['radioSelected']
+
+    render_template("/writer.html", )
     start (str(numero))
     import subprocess
 
