@@ -120,12 +120,12 @@ def start(string):
                  #   data.append(0x00)
 
                 # print ("Now we fill it with 0x00:")
-                MIFAREReader.MFRC522_Write(bloco1, data1)
+                # MIFAREReader.MFRC522_Write(bloco1, data1)
                 # print ("\n")
 
                 # print ("It is now empty:")
                 # Check to see if it was written
-                MIFAREReader.MFRC522_Read(bloco1)
+                # MIFAREReader.MFRC522_Read(bloco1)
                 # print ("\n")
 
                 # Stop
