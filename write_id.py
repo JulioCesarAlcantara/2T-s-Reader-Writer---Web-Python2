@@ -3,7 +3,7 @@
 
 import RPi.GPIO as GPIO
 import MFRC522
-import signal
+# import signal
 
 
 
@@ -16,6 +16,7 @@ def end_read(signal,frame):
     GPIO.cleanup()
 
 def start(string):
+    import signal
     continue_reading = True
     # Hook the SIGINT
     signal.signal(signal.SIGINT, end_read)
