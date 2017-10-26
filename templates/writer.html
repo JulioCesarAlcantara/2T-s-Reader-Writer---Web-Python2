@@ -110,10 +110,13 @@
                     <br><br>
                     <div class="row">
                         {%if msg is defined%}
-                        <div class=' alert alert-info alert-dismissable fade in'><strong>Info!</strong>{{msg}}</div>
+                        <div class=' alert alert-info alert-dismissable'><strong>Success!</strong>{{msg}}</div>
                         {%endif%}
                         {%if erro is defined%}
-                        <div class=' alert alert-info alert-dismissable fade in'><strong>Info!</strong>{{msg}}</div>
+                        <div class=' alert alert-danger alert-dismissable'><strong>Info!</strong>{{msg}}</div>
+                        {%endif%}
+                        {%if tagAtiv is defined%}
+                        <div class=' alert alert-info alert-dismissable'><strong>Info!</strong>{{msg}}</div>
                         {%endif%}
                     </div>
                 </div>

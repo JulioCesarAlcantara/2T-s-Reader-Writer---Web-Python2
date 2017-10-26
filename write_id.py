@@ -29,10 +29,10 @@ def start(string):
     texto = string
     things = Things ()
 
-    dado = things.search_things_by_num1(texto)
-    location = things.search_locations ()
+    dados = things.search_things_by_num1(texto)
+    location = things.search_locations()
 
-    render_template ('/writer.html', tagAtiv="Tag Activated Successfully !!", locations=location, dado=dado)
+    render_template ('/writer.html', tagAtiv="Tag Activated Successfully !!", locations=location, dado=dados)
 
     import signal
     continue_reading = True
