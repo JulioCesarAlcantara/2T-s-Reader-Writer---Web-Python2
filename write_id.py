@@ -22,8 +22,8 @@ def end_read(signal,frame):
 
 def start(string):
     texto = string
-    things = Things ()
-    location = things.search_locations ()
+    # things = Things ()
+    # location = things.search_locations ()
     #
     # dados = []
     # dados.append(things.search_things_by_num1(texto))
@@ -97,14 +97,16 @@ def start(string):
 
                 # print ("Sector 8 will now be filled with 0xFF:")
                 # Write the data
-                MIFAREReader.MFRC522_Write(bloco1, data1)
+                write = MIFAREReader.MFRC522_Write(bloco1, data1)
                 # print ("\n")
-                # if write == True:
-                #     # MIFAREReader.MFRC522_StopCrypto1 ()
-                #     render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
-                # else:
-                #     # MIFAREReader.MFRC522_StopCrypto1 ()
-                #     render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
+                if write == True:
+                    return True
+                    # MIFAREReader.MFRC522_StopCrypto1 ()
+                    # render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
+                else:
+                    return False
+                    # MIFAREReader.MFRC522_StopCrypto1 ()
+                    # render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
 
                 # print ("It now looks like this:")
                 # Check to see if it was written

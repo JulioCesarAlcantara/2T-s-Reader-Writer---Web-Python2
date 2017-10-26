@@ -425,7 +425,8 @@ class MFRC522:
             return False
         if status == self.MI_OK:
             print "Data written"
-            return render_template ('/writer.html', msg="Tag Activated Successfully !!")
+            return True
+            # return render_template ('/writer.html', msg="Tag Activated Successfully !!")
 
   def MFRC522_DumpClassic1K(self, key, uid):
     i = 0

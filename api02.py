@@ -204,8 +204,17 @@ def synchronize():
 def writerInTag():
     numero = request.form['radioSelected']
 
+    things = Things ()
+    location = things.search_locations ()
+
     # return render_template('/writer.html', tagAtiv = 'Aproxime a etiqueta para active')
-    start (str(numero))
+    tag = start (str(numero))
+
+    if tag == True:
+        render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
+    else:
+        return render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
+
     import subprocess
 
     # processo = subprocess.call (["sudo python /home/pi/Documentos/python2/2T-s-Reader-Writer---Web-Python2/write_id.py", "26"], shell=True)
