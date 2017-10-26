@@ -19,7 +19,7 @@ def start():
     import sys
     for param in sys.argv:
         texto = param
-        return texto
+        return "texto: " + texto
 
     import signal
     continue_reading = True
@@ -116,3 +116,6 @@ def start():
                 continue_reading = False
             else:
                 print ("Authentication error")
+
+
+start()
