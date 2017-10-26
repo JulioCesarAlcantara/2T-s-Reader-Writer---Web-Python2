@@ -90,15 +90,15 @@ def start(string):
 
                 # print ("Sector 8 looked like this:")
                 # Read block 8
-                # MIFAREReader.MFRC522_Read(bloco1)
-                # print ("\n")
+                MIFAREReader.MFRC522_Read(bloco1)
+                print ("\n")
 
 
 
                 # print ("Sector 8 will now be filled with 0xFF:")
                 # Write the data
                 write = MIFAREReader.MFRC522_Write(bloco1, data1)
-                # print ("\n")
+                print ("\n")
                 if write == True:
                     return True
                     # MIFAREReader.MFRC522_StopCrypto1 ()
@@ -110,8 +110,8 @@ def start(string):
 
                 # print ("It now looks like this:")
                 # Check to see if it was written
-                # MIFAREReader.MFRC522_Read(bloco1)
-                # print ("\n")
+                MIFAREReader.MFRC522_Read(bloco1)
+                print ("\n")
 
 
                 # data = []
@@ -120,12 +120,12 @@ def start(string):
                  #   data.append(0x00)
 
                 # print ("Now we fill it with 0x00:")
-                # MIFAREReader.MFRC522_Write(bloco1, data1)
+                MIFAREReader.MFRC522_Write(bloco1, data1)
                 # print ("\n")
 
                 # print ("It is now empty:")
                 # Check to see if it was written
-                # MIFAREReader.MFRC522_Read(bloco1)
+                MIFAREReader.MFRC522_Read(bloco1)
                 # print ("\n")
 
                 # Stop
