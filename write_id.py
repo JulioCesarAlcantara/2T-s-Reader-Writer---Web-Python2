@@ -19,6 +19,7 @@ def start():
     import sys
     for param in sys.argv:
         texto = param
+        return texto
 
     import signal
     continue_reading = True
