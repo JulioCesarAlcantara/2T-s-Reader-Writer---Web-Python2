@@ -100,10 +100,10 @@ def start(string):
                 write = MIFAREReader.MFRC522_Write(bloco1, data1)
                 # print ("\n")
                 if write == True:
-                    MIFAREReader.MFRC522_StopCrypto1 ()
+                    # MIFAREReader.MFRC522_StopCrypto1 ()
                     return render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
                 else:
-                    MIFAREReader.MFRC522_StopCrypto1 ()
+                    # MIFAREReader.MFRC522_StopCrypto1 ()
                     return render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
 
                 # print ("It now looks like this:")
