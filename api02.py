@@ -25,7 +25,7 @@ import os
 from Things import Things
 
 from User import User
-import write_id
+# import write_id
 
 import RPi.GPIO as GPIO
 import MFRC522
