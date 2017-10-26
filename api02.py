@@ -203,7 +203,8 @@ def synchronize():
 @app.route('/writeTag', methods=['POST'])
 def writerInTag():
 
-    start ('26')
+    numero = request.form['radioSelected']
+    start (str(numero))
     import subprocess
 
     # processo = subprocess.call (["sudo python /home/pi/Documentos/python2/2T-s-Reader-Writer---Web-Python2/write_id.py", "26"], shell=True)
