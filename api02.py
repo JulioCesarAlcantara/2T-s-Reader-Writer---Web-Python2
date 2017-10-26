@@ -203,9 +203,16 @@ def synchronize():
 @app.route('/writeTag', methods=['POST'])
 def writerInTag():
 
-    texto = request.form['radioSelected']
+    texto = str(request.form['radioSelected'])
 
     continue_reading = True
+
+    # Capture SIGINT for cleanup when the script is aborted
+    def end_read(signal, frame):
+        global continue_reading
+        print ("Ctrl+C captured, ending read.")
+        continue_reading = False
+        GPIO.cleanup ()
 
     # Hook the SIGINT
     signal.signal (signal.SIGINT, end_read)
@@ -247,13 +254,6 @@ def writerInTag():
 
             # Check if authenticated
             if status == MIFAREReader.MI_OK:
-
-                # Variable for the data to write
-
-                # print("------texto------")
-                # print(len(texto))
-
-
                 data1 = []
 
                 for x in range (0, 16 - int (len (texto))):
@@ -299,14 +299,15 @@ def writerInTag():
             else:
                 print ("Authentication error")
 
-    return render_template ('/writer.html')
+
+    return render_template ('/writer.html', msg="sucesso")
 
 
-def end_read():
+def end_read(signal,frame):
     global continue_reading
     print ("Ctrl+C captured, ending read.")
     continue_reading = False
-    GPIO.cleanup ()
+    GPIO.cleanup()
 
 
 @app.route('/readerLoc', methods=['POST'])
