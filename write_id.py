@@ -3,7 +3,7 @@
 
 import RPi.GPIO as GPIO
 import MFRC522
-# import signal
+import signal
 
 
 
@@ -120,4 +120,4 @@ def start(string):
                 print ("Authentication error")
 
 
-start('26')
+# start('26')

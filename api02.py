@@ -25,11 +25,11 @@ import os
 from Things import Things
 
 from User import User
-# import write_id
+from write_id  import start
 
-import RPi.GPIO as GPIO
-import MFRC522
-import signal
+# import RPi.GPIO as GPIO
+# import MFRC522
+# import signal
 
 
 reload(sys)
@@ -203,6 +203,7 @@ def synchronize():
 @app.route('/writeTag', methods=['POST'])
 def writerInTag():
 
+    start ('26')
     import subprocess
 
     # processo = subprocess.call (["sudo python /home/pi/Documentos/python2/2T-s-Reader-Writer---Web-Python2/write_id.py", "26"], shell=True)
