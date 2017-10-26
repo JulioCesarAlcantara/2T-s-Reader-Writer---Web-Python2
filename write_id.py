@@ -26,7 +26,6 @@ def start(string):
 
     dados = []
     dados.append(things.search_things_by_num1(texto))
-    
     location = things.search_locations()
 
     render_template ('/writer.html', tagAtiv="Tag Activated Successfully !!", locations=location, dado=dados)
