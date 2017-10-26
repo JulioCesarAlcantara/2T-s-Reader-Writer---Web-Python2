@@ -85,8 +85,8 @@
                                    </thead>
                                    <tbody>
                                         {%for things in dado%}
-                                        <tr align="center">
-                                            <td><input name="radioSelected" type="radio" class="checkthis" value="{{things.nr_things1}}" /></td>
+                                        <tr align="center" >
+                                            <td><input required name="radioSelected" type="radio" class="checkthis" value="{{things.nr_things1}}" /></td>
                                             <td>{{things.nr_things1}}</td>
                                             <td>{{things.description}}</td>
                                             <td>{{things.location.loca_room}}</td>

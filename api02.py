@@ -212,7 +212,7 @@ def writerInTag():
         start (str(numero))
 
         # if tag == True:
-        render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
+        # render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
         # else:
     except Exception as e:
         return render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
