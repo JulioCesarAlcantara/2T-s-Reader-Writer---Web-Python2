@@ -26,8 +26,8 @@ def start(string):
     import signal
     continue_reading = True
     # Hook the SIGINT
-    signal.signal(signal.SIGINT, end_read)
-
+    # signal.signal(signal.SIGINT, end_read)
+    is_main_thread()
     # Create an object of the class MFRC522
     MIFAREReader = MFRC522.MFRC522()
 
@@ -120,4 +120,14 @@ def start(string):
                 print ("Authentication error")
 
 
-# start('26')
+
+def is_main_thread():
+    try:
+        # Backup the current signal handler
+        back_up = signal.signal(signal.SIGINT, end_read)
+    except ValueError:
+        # Only Main Thread can handle signals
+        return False
+    # Restore signal handler
+    signal.signal(signal.SIGINT, end_read)
+    return True
