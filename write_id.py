@@ -101,10 +101,10 @@ def start(string):
                 # print ("\n")
                 if write == True:
                     MIFAREReader.MFRC522_StopCrypto1 ()
-                    render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
+                    return render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
                 else:
                     MIFAREReader.MFRC522_StopCrypto1 ()
-                    render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
+                    return render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
 
                 # print ("It now looks like this:")
                 # Check to see if it was written

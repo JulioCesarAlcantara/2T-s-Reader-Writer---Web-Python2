@@ -204,7 +204,7 @@ def synchronize():
 def writerInTag():
     numero = request.form['radioSelected']
 
-    render_template('/writer.html', tagAtiv = 'Aproxime a etiqueta para active')
+    return render_template('/writer.html', tagAtiv = 'Aproxime a etiqueta para active')
     start (str(numero))
     import subprocess
 
