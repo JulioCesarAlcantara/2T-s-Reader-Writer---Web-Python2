@@ -110,6 +110,3 @@ def start(string):
                 continue_reading = False
             else:
                 print ("Authentication error")
-
-
-start('88670')

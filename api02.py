@@ -203,7 +203,7 @@ def synchronize():
 @app.route('/writeTag', methods=['POST'])
 def writerInTag():
 
-    texto = '88670'
+    texto = '26'
 
     a = write_id
     a.start(texto)
