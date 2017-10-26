@@ -203,19 +203,19 @@ def synchronize():
 @app.route('/writeTag', methods=['POST'])
 def writerInTag():
 
-    texto = str(request.form['radioSelected'])
+    texto = '88670'
 
     continue_reading = True
 
     # Capture SIGINT for cleanup when the script is aborted
-    def end_read(signal, frame):
-        global continue_reading
-        print ("Ctrl+C captured, ending read.")
-        continue_reading = False
-        GPIO.cleanup ()
+    # def end_read(signal, frame):
+    #     global continue_reading
+    #     print ("Ctrl+C captured, ending read.")
+    #     continue_reading = False
+    #     GPIO.cleanup ()
 
     # Hook the SIGINT
-    signal.signal (signal.SIGINT, end_read)
+    signal (signal.SIGINT, end_read)
 
     # Create an object of the class MFRC522
     MIFAREReader = MFRC522.MFRC522 ()
