@@ -58,11 +58,11 @@
             </div>
             <br>
             {%if message is defined%}
-            <div class=' alert alert-warning'><strong>Warning!</strong> {message}</div>
+            <div class=' alert alert-warning'><strong>Warning!</strong> {{message}}</div>
             {%endif%}
 
             {%if texto is defined%}
-            <div class=' alert alert-info alert-dismissable fade in'><strong>Info!</strong> {texto}</div>
+            <div class=' alert alert-info alert-dismissable fade in'><strong>Info!</strong> {{texto}}</div>
             {%endif%}
 
 
@@ -106,8 +106,13 @@
                         <div class="col col-md-offset-8">
                             <button type="submit" class="btn btn-lg btn-success col-md-4 align-right glyphicon glyphicon-ok"> Active</button>
                         </div>
-
+                    </div>
+                    <br><br>
+                    <div class="row">
                         {%if msg is defined%}
+                        <div class=' alert alert-info alert-dismissable fade in'><strong>Info!</strong>{{msg}}</div>
+                        {%endif%}
+                        {%if erro is defined%}
                         <div class=' alert alert-info alert-dismissable fade in'><strong>Info!</strong>{{msg}}</div>
                         {%endif%}
                     </div>

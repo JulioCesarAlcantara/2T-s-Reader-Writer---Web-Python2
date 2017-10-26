@@ -2,12 +2,17 @@
 # -*- coding: utf8 -*-
 
 import RPi.GPIO as GPIO
+from flask import render_template
+
 import MFRC522
 import signal
 
 
 
 # Capture SIGINT for cleanup when the script is aborted
+from Things import Things
+
+
 def end_read(signal,frame):
 
     global continue_reading
@@ -33,6 +38,11 @@ def start(string):
 
     # This loop keeps checking for chips. If one is near it will get the UID and authenticate
     while continue_reading:
+
+        things = Things ()
+        location = things.search_locations ()
+
+        render_template ('/writer.html', msg="sucesso", locations=location)
 
         # Scan for cards
         (status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
@@ -81,35 +91,38 @@ def start(string):
                 for digito in texto:
                     data1.append(int(digito))
 
-                print ("Sector 8 looked like this:")
+                # print ("Sector 8 looked like this:")
                 # Read block 8
-                MIFAREReader.MFRC522_Read(bloco1)
-                print ("\n")
+                # MIFAREReader.MFRC522_Read(bloco1)
+                # print ("\n")
 
-                print ("Sector 8 will now be filled with 0xFF:")
+                # print ("Sector 8 will now be filled with 0xFF:")
                 # Write the data
                 MIFAREReader.MFRC522_Write(bloco1, data1)
-                print ("\n")
-
-                print ("It now looks like this:")
+                # print ("\n")
+                if MIFAREReader.MFRC522_Write() == True:
+                    render_template ('/writer.html', msg="Tag Activated Successfully !!")
+                else:
+                    render_template ('/writer.html', erro="Tag Activation Error !!")
+                # print ("It now looks like this:")
                 # Check to see if it was written
-                MIFAREReader.MFRC522_Read(bloco1)
-                print ("\n")
+                # MIFAREReader.MFRC522_Read(bloco1)
+                # print ("\n")
 
 
-                data = []
+                # data = []
                 # Fill the data with 0x00
                 #for x in range(0,16):
                  #   data.append(0x00)
 
-                print ("Now we fill it with 0x00:")
-                MIFAREReader.MFRC522_Write(bloco1, data1)
-                print ("\n")
+                # print ("Now we fill it with 0x00:")
+                # MIFAREReader.MFRC522_Write(bloco1, data1)
+                # print ("\n")
 
-                print ("It is now empty:")
+                # print ("It is now empty:")
                 # Check to see if it was written
-                MIFAREReader.MFRC522_Read(bloco1)
-                print ("\n")
+                # MIFAREReader.MFRC522_Read(bloco1)
+                # print ("\n")
 
                 # Stop
                 MIFAREReader.MFRC522_StopCrypto1()

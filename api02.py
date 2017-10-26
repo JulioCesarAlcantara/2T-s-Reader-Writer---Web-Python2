@@ -202,6 +202,8 @@ def synchronize():
 
 @app.route('/writeTag', methods=['POST'])
 def writerInTag():
+    location = things.search_locations ()
+
 
     numero = request.form['radioSelected']
     start (str(numero))
@@ -212,13 +214,6 @@ def writerInTag():
     # print "Resultado" + str(processo)
 
     return render_template ('/writer.html', msg="sucesso")
-
-
-def end_read(signal,frame):
-    global continue_reading
-    print ("Ctrl+C captured, ending read.")
-    continue_reading = False
-    GPIO.cleanup()
 
 
 @app.route('/readerLoc', methods=['POST'])
