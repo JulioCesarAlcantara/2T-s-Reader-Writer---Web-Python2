@@ -202,9 +202,6 @@ def synchronize():
 
 @app.route('/writeTag', methods=['POST'])
 def writerInTag():
-    location = things.search_locations ()
-
-
     numero = request.form['radioSelected']
     start (str(numero))
     import subprocess
