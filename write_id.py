@@ -15,11 +15,13 @@ def end_read(signal,frame):
     continue_reading = False
     GPIO.cleanup()
 
-def start():
-    import sys
-    for param in sys.argv:
-        texto = param
-        return "texto: " + texto
+def start(string):
+    # import sys
+    # for param in sys.argv:
+    #     texto = param
+    #     print "texto: " + texto
+
+    texto = string
 
     import signal
     continue_reading = True
@@ -118,4 +120,4 @@ def start():
                 print ("Authentication error")
 
 
-start()
+start('26')
