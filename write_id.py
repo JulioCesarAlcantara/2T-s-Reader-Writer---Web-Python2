@@ -15,7 +15,11 @@ def end_read(signal,frame):
     continue_reading = False
     GPIO.cleanup()
 
-def start(string):
+def start():
+    import sys
+    for param in sys.argv:
+        texto = param
+
     import signal
     continue_reading = True
     # Hook the SIGINT
@@ -60,7 +64,7 @@ def start(string):
             if status == MIFAREReader.MI_OK:
 
                 # Variable for the data to write
-                texto = string
+
             #print("------texto------")
             #print(len(texto))
 

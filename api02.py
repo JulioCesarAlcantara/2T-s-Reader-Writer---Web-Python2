@@ -203,11 +203,12 @@ def synchronize():
 @app.route('/writeTag', methods=['POST'])
 def writerInTag():
 
-    texto = '26'
+    import subprocess
 
-    a = write_id
-    a.start(texto)
+    processo = subprocess.call (["python /home/pi/Documentos/python2/2T-s-Reader-Writer---Web-Python2/write_id.py", "26"], shell=True)
 
+    print  processo
+    
     return render_template ('/writer.html', msg="sucesso")
 
 
