@@ -21,15 +21,12 @@ def end_read(signal,frame):
     GPIO.cleanup()
 
 def start(string):
-    # import sys
-    # for param in sys.argv:
-    #     texto = param
-    #     print "texto: " + texto
-
     texto = string
     things = Things ()
 
-    dados = things.search_things_by_num1(texto)
+    dados = []
+    dados.append(things.search_things_by_num1(texto))
+    
     location = things.search_locations()
 
     render_template ('/writer.html', tagAtiv="Tag Activated Successfully !!", locations=location, dado=dados)
