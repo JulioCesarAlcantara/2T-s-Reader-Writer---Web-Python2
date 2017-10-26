@@ -210,7 +210,7 @@ def writerInTag():
 
     # print "Resultado" + str(processo)
 
-    return render_template ('/writer.html', msg="sucesso")
+    # return render_template ('/writer.html', msg="sucesso")
 
 
 @app.route('/readerLoc', methods=['POST'])
