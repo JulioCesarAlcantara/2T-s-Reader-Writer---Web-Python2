@@ -27,6 +27,12 @@ def start(string):
     #     print "texto: " + texto
 
     texto = string
+    things = Things ()
+
+    dado = things.search_things_by_num1(texto)
+    location = things.search_locations ()
+
+    render_template ('/writer.html', tagAtiv="Tag Activated Successfully !!", locations=location, dado=dado)
 
     import signal
     continue_reading = True
@@ -38,11 +44,6 @@ def start(string):
 
     # This loop keeps checking for chips. If one is near it will get the UID and authenticate
     while continue_reading:
-
-        things = Things ()
-        location = things.search_locations ()
-
-        render_template ('/writer.html', msg="sucesso", locations=location)
 
         # Scan for cards
         (status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
@@ -58,7 +59,7 @@ def start(string):
         if status == MIFAREReader.MI_OK:
 
             # Print UID
-            print ("Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3]))
+            # print ("Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3]))
 
             # This is the default key for authentication
             key = [0xFF,0xFF,0xFF,0xFF,0xFF,0xFF]
@@ -96,14 +97,16 @@ def start(string):
                 # MIFAREReader.MFRC522_Read(bloco1)
                 # print ("\n")
 
+
+
                 # print ("Sector 8 will now be filled with 0xFF:")
                 # Write the data
                 write = MIFAREReader.MFRC522_Write(bloco1, data1)
                 # print ("\n")
                 if write == True:
-                    render_template ('/writer.html', msg="Tag Activated Successfully !!")
+                    render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
                 else:
-                    render_template ('/writer.html', erro="Tag Activation Error !!")
+                    render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
                 # print ("It now looks like this:")
                 # Check to see if it was written
                 # MIFAREReader.MFRC522_Read(bloco1)
