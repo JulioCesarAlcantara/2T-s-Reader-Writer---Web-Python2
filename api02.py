@@ -207,7 +207,6 @@ def writerInTag():
 
     things = Things ()
     location = things.search_locations ()
-    return json.dumps (para_dict (location))
 
     # render_template('writer.html', tagAtiv = 'Aproxime a etiqueta para active')
     tag = start (str(numero))
@@ -235,7 +234,11 @@ def thingsTableReader():
         things = Things ()
         location = things.search_locations ()
 
+        print json.dumps (para_dict (location))
+
         resposta = startLeitura()
+
+
         if resposta == False:
             return render_template ('/reader.html', locations=location, message="Error saving file.")
         elif resposta == 0:
