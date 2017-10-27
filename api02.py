@@ -210,7 +210,7 @@ def writerInTag():
     location = things.search_locations ()
 
     # render_template('/writer.html', tagAtiv = 'Aproxime a etiqueta para active')
-    url_for('writer.html', tagAtiv = 'Aproxime a etiqueta para active')
+    render_template('writer.html', tagAtiv = 'Aproxime a etiqueta para active')
     tag = start (str(numero))
 
 
