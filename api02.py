@@ -26,7 +26,7 @@ from Things import Things
 
 from User import User
 from write_id  import start
-from reader  import startLeitura
+# from reader  import startLeitura
 
 # import RPi.GPIO as GPIO
 # import MFRC522
@@ -236,7 +236,7 @@ def thingsTableReader():
 
     if loca_id != "0":
         while loca_id != "0":
-            startLeitura()
+            # startLeitura()
             txt = "Waiting for Reading ..."
     else:
         msg = "Please, Select a Location to Read."
