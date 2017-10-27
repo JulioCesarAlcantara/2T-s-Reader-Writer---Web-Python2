@@ -231,7 +231,16 @@ def thingsTableReader():
     loca_id = request.form['location1']
 
     if loca_id != "0":
-        startLeitura()
+        things = Things ()
+        location = things.search_locations ()
+
+        resposta = startLeitura()
+        if resposta == True:
+            render_template ('/reader.html', locations=location, message="Sucesso!!!!!.")
+        elif resposta == False:
+            return render_template ('/reader.html', locations=location, message="Error saving file.")
+        else:
+            return render_template ('/reader.html', locations=location, message="Erro de leitura")
     else:
         msg = "Please, Select a Location to Read."
         things = Things ()

@@ -69,18 +69,17 @@ def startLeitura():
 
                 things = Things()
 
-                location = things.search_locations ()
                 thingsRead = json.dumps(para_dict(things.search_things_by_num1 (numero)))
 
                 try:
                     arquivo = open ('listRead.json', "w")
                     arquivo.write(thingsRead)
                     arquivo.close()
-                    return render_template ('/reader.html', locations=location, message="Error saving file.")
+                    return True
                 except Exception as e:
-                    return render_template ('/reader.html', locations=location, message="Error saving file.")
+                    return False
             else:
-                return "Authentication error"
+                return 0
 
 
 def is_main_thread():
