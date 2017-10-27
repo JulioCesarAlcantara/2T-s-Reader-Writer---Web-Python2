@@ -28,7 +28,7 @@ def startLeitura():
     is_main_thread()
     # Create an object of the class MFRC522
     MIFAREReader = MFRC522.MFRC522()
-
+    array = []
     # This loop keeps checking for chips. If one is near it will get the UID and authenticate
     while continue_reading:
 
@@ -65,16 +65,17 @@ def startLeitura():
             # Check if authenticated
             if status == MIFAREReader.MI_OK:
                 numero = MIFAREReader.MFRC522_Read (sectorBlock)
-                MIFAREReader.MFRC522_StopCrypto1 ()
+
 
                 things = Things()
-                array = []
+
 
                 array.append(things.search_things_by_num2 (numero))
 
+                MIFAREReader.MFRC522_StopCrypto1 ()
                 # thingsRead = json.dumps(para_dict(array))
 
-                return array
+
 
                 # try:
                 #     arquivo = open ('listRead.json', "w")
@@ -89,6 +90,7 @@ def startLeitura():
                 print "Não achou nada !!"
                 return 0
 
+    return array
 
 def is_main_thread():
     try:

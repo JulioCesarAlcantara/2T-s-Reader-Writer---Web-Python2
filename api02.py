@@ -238,7 +238,6 @@ def thingsTableReader():
 
         resposta = startLeitura()
 
-        # return json.dumps (para_dict (resposta))
 
         if resposta == False:
             return render_template ('/reader.html', locations=location, message="Error saving file.")
