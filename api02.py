@@ -28,9 +28,7 @@ from User import User
 from write_id  import start
 from reader  import startLeitura
 
-# import RPi.GPIO as GPIO
-# import MFRC522
-# import signal
+array = []
 
 
 reload(sys)
@@ -244,7 +242,8 @@ def thingsTableReader():
         elif resposta == 0:
             return render_template ('/reader.html', locations=location, message="Erro de leitura")
         else:
-            return render_template ('/reader.html', locations=location, thingsdata=resposta)
+            array.append(resposta[0])
+            return render_template ('/reader.html', locations=location, thingsdata=array)
     else:
         msg = "Please, Select a Location to Read."
         things = Things ()
