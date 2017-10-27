@@ -26,6 +26,7 @@ from Things import Things
 
 from User import User
 from write_id  import start
+from reader  import startLeitura
 
 # import RPi.GPIO as GPIO
 # import MFRC522
@@ -213,7 +214,8 @@ def writerInTag():
 
 
     if tag == True:
-        print "passou aqui !!!"# render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
+        print "passou aqui !!!"
+        render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
         # else:
     # except Exception as e:
     #     return render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
@@ -229,21 +231,18 @@ def writerInTag():
 
 @app.route('/readerLoc', methods=['POST'])
 def thingsTableReader():
-    things = Things ()
-    location = things.search_locations ()
 
     loca_id = request.form['location1']
 
     if loca_id != "0":
-
-        print ("Inserir funcao de leitura")
-        txt = "Waiting for Reading ..."
+        while loca_id != "0":
+            startLeitura()
+            txt = "Waiting for Reading ..."
     else:
         msg = "Please, Select a Location to Read."
+        things = Things ()
+        location = things.search_locations ()
         return render_template ('/reader.html', locations=location, message=msg)
-
-
-    return render_template('/reader.html', locations=location, texto=txt)
 
 @app.route('/writeCon', methods=['POST'])
 def thingsTableWriter():

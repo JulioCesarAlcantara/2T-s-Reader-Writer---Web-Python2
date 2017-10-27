@@ -350,9 +350,10 @@ class MFRC522:
     if len(backData) == 16:
       print "Sector "+str(blockAddr)+" "+str(backData)
       print (str(backData))
-      dados = convertendo2.convertToInteger(backData)
+      numero = convertendo2.convertToInteger(backData)
       print("Numero: ")
-      print (dados)
+      print (numero)
+      return numero
 #      return dados
 
       # try:
