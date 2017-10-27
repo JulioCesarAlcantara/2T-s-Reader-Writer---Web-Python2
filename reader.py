@@ -70,7 +70,7 @@ def startLeitura():
                 things = Things()
                 array = []
 
-                array.append(things.search_things_by_num1 (numero))
+                array.append(things.search_things_by_num2 (numero))
 
                 # thingsRead = json.dumps(para_dict(array))
 
