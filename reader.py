@@ -22,15 +22,6 @@ def end_read(signal,frame):
     GPIO.cleanup()
 
 def startLeitura():
-    # things = Things ()
-    # location = things.search_locations ()
-    #
-    # dados = []
-    # dados.append(things.search_things_by_num1(texto))
-
-    #
-    # render_template ('/writer.html', tagAtiv="Tag Activated Successfully !!")
-
     continue_reading = True
     # Hook the SIGINT
     # signal.signal(signal.SIGINT, end_read)
@@ -81,7 +72,6 @@ def startLeitura():
                 location = things.search_locations ()
                 thingsRead = json.dumps(para_dict(things.search_things_by_num1 (numero)))
 
-
                 try:
                     arquivo = open ('listRead.json', "w")
                     arquivo.write(thingsRead)
@@ -90,7 +80,7 @@ def startLeitura():
                 except Exception as e:
                     return render_template ('/reader.html', locations=location, message="Error saving file.")
             else:
-                print "Authentication error"
+                return "Authentication error"
 
 
 def is_main_thread():
