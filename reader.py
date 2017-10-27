@@ -79,7 +79,7 @@ def startLeitura():
                     arquivo.write(thingsRead)
                     arquivo.close()
                     print "SUCESSO"
-                    return True
+                    return array
                 except Exception as e:
                     print "ERRO AQUI !!!"
                     return False

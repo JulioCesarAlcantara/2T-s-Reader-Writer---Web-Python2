@@ -235,12 +235,12 @@ def thingsTableReader():
         location = things.search_locations ()
 
         resposta = startLeitura()
-        if resposta == True:
-            render_template ('/reader.html', locations=location, message="Sucesso!!!!!.")
-        elif resposta == False:
+        if resposta == False:
             return render_template ('/reader.html', locations=location, message="Error saving file.")
-        else:
+        elif resposta == 0:
             return render_template ('/reader.html', locations=location, message="Erro de leitura")
+        else:
+            return render_template ('/reader.html', locations=location, thingsdata=resposta)
     else:
         msg = "Please, Select a Location to Read."
         things = Things ()
