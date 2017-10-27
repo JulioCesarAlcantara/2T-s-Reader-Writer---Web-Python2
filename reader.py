@@ -76,7 +76,7 @@ def startLeitura():
                 numero = MIFAREReader.MFRC522_Read (sectorBlock)
                 MIFAREReader.MFRC522_StopCrypto1 ()
 
-                things = Things
+                things = Things()
 
                 location = things.search_locations ()
                 thingsRead = json.dumps(para_dict(things.search_things_by_num1 (numero)))
