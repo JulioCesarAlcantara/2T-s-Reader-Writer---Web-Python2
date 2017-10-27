@@ -215,7 +215,7 @@ def writerInTag():
 
     if tag == True:
         print "passou aqui !!!"
-        render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
+        return render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
         # else:
     # except Exception as e:
     #     return render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
