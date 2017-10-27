@@ -45,10 +45,12 @@
                     <div class="col-md-6 col-md-offset-3">
                         <div class="select selectpicker ">
                           <select autofocus  required name="location1" class="selectpicker form-control account-wall">
-                            <option value="0">Location ...</option>
-                            {%for loc in locations%}
-                            <option value="{{loc.loca_id}}">{{loc.loca_room}}</option>
-                            {%endfor%}
+                            {%if locations is defined%}
+                              <option value="0">Location ...</option>
+                              {%for loc in locations%}
+                                <option value="{{loc.loca_id}}">{{loc.loca_room}}</option>
+                              {%endfor%}
+                            {%endif%}
                           </select>
                         </div>
                     </div>
@@ -75,7 +77,7 @@
                     <div class="col-md-12">
                         <div class="table-responsive">
                           <table name="" id="mytable" class="table table-bordred table-striped">
-                               {% if thingsdata is defined%}
+                               {%if thingsdata is defined%}
                                <thead>
                                    <th><center>Code</center></th>
                                    <th><center>Name</center></th>
@@ -104,6 +106,10 @@
                             <button type="submit" class="btn btn-lg btn-success col-md-6 align-right glyphicon glyphicon-ok"> Save</button>
                         </div>
                     </div>
+
+                    {%if message is defined%}
+                    <div class=' alert alert-danger alert-dismissable fade in'><strong>Info!</strong> {{message}}</div>
+                    {%endif%}
                 </div>
             </div>
         </form>

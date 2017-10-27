@@ -26,7 +26,7 @@ from Things import Things
 
 from User import User
 from write_id  import start
-# from reader  import startLeitura
+from reader  import startLeitura
 
 # import RPi.GPIO as GPIO
 # import MFRC522
@@ -205,23 +205,24 @@ def synchronize():
 def writerInTag():
     numero = request.form['radioSelected']
 
-    # try:
     things = Things ()
     location = things.search_locations ()
 
-    # render_template('/writer.html', tagAtiv = 'Aproxime a etiqueta para active')
     render_template('writer.html', tagAtiv = 'Aproxime a etiqueta para active')
     tag = start (str(numero))
 
 
     if tag == True:
-        print "passou aqui !!!"
-        return render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
+        things = Things ()
+        exits = things.active_things_by_num1(numero)
+
+        if exits == True:
+            return render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
+        else:
+            return render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
+
     else:
-        return render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
-
-
-    # return render_template ('/writer.html', msg="sucesso")
+        return render_template ('/writer.html', erro="Could not Activate Tag. Contact the Analyst!", locations=location)
 
 
 @app.route('/readerLoc', methods=['POST'])
@@ -230,9 +231,7 @@ def thingsTableReader():
     loca_id = request.form['location1']
 
     if loca_id != "0":
-        while loca_id != "0":
-            # startLeitura()
-            txt = "Waiting for Reading ..."
+        startLeitura()
     else:
         msg = "Please, Select a Location to Read."
         things = Things ()
