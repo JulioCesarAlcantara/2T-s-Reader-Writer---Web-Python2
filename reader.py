@@ -77,13 +77,14 @@ def startLeitura():
                 MIFAREReader.MFRC522_StopCrypto1 ()
 
                 things = Things
+
                 location = things.search_locations ()
-                thingsRead = json.dumps(things.search_things_by_num1 (numero), indent=4, sort_keys=False)
+                thingsRead = json.dumps(para_dict(things.search_things_by_num1 (numero)))
 
 
                 try:
                     arquivo = open ('listRead.json', "w")
-                    arquivo.write(thingsRead())
+                    arquivo.write(thingsRead)
                     arquivo.close()
                     return render_template ('/reader.html', locations=location, message="Error saving file.")
                 except Exception as e:
@@ -102,3 +103,17 @@ def is_main_thread():
     # Restore signal handler
     signal.signal(signal.SIGINT, end_read)
     return True
+
+def para_dict(obj):
+    # Se for um objeto, transforma num dict
+    if hasattr(obj, '__dict__'):
+        obj = obj.__dict__
+
+    # Se for um dict, le chaves e valores; converte valores
+    if isinstance(obj, dict):
+        return {k: para_dict(v) for k, v in obj.items()}
+
+    elif isinstance(obj, list) or isinstance(obj, tuple):
+        return [para_dict(e) for e in obj]
+    else:
+        return obj
