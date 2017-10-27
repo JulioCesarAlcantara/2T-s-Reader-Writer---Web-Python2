@@ -68,17 +68,23 @@ def startLeitura():
                 MIFAREReader.MFRC522_StopCrypto1 ()
 
                 things = Things()
+                array = []
 
-                thingsRead = json.dumps(para_dict(things.search_things_by_num1 (numero)))
+                array.append(things.search_things_by_num1 (numero))
+
+                thingsRead = json.dumps(para_dict(array))
 
                 try:
                     arquivo = open ('listRead.json', "w")
                     arquivo.write(thingsRead)
                     arquivo.close()
+                    print "SUCESSO"
                     return True
                 except Exception as e:
+                    print "ERRO AQUI !!!"
                     return False
             else:
+                print "Não achou nada !!"
                 return 0
 
 
