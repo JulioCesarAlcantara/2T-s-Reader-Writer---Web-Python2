@@ -242,7 +242,7 @@ def thingsTableReader():
         elif resposta == 0:
             return render_template ('/reader.html', locations=location, message="Erro de leitura")
         else:
-            array.append(resposta[0])
+            array.append(resposta)
             return render_template ('/reader.html', locations=location, thingsdata=array)
     else:
         msg = "Please, Select a Location to Read."
