@@ -207,8 +207,9 @@ def writerInTag():
 
     things = Things ()
     location = things.search_locations ()
+    return json.dumps (para_dict (location))
 
-    render_template('writer.html', tagAtiv = 'Aproxime a etiqueta para active')
+    # render_template('writer.html', tagAtiv = 'Aproxime a etiqueta para active')
     tag = start (str(numero))
 
 
