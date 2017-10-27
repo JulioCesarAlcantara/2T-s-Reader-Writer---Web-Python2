@@ -72,17 +72,19 @@ def startLeitura():
 
                 array.append(things.search_things_by_num1 (numero))
 
-                thingsRead = json.dumps(para_dict(array))
+                # thingsRead = json.dumps(para_dict(array))
 
-                try:
-                    arquivo = open ('listRead.json', "w")
-                    arquivo.write(thingsRead)
-                    arquivo.close()
-                    print "SUCESSO"
-                    return array
-                except Exception as e:
-                    print "ERRO AQUI !!!"
-                    return False
+                return array
+
+                # try:
+                #     arquivo = open ('listRead.json', "w")
+                #     arquivo.write(thingsRead)
+                #     arquivo.close()
+                #     print "SUCESSO"
+                #     return array
+                # except Exception as e:
+                #     print "ERRO AQUI !!!"
+                #     return False
             else:
                 print "Não achou nada !!"
                 return 0
