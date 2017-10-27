@@ -110,8 +110,8 @@ def start(string):
 
                 # print ("It now looks like this:")
                 # Check to see if it was written
-                MIFAREReader.MFRC522_Read(bloco1)
-                print ("\n")
+                # MIFAREReader.MFRC522_Read(bloco1)
+                # print ("\n")
 
 
                 # data = []
