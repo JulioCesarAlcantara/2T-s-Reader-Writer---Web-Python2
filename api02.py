@@ -209,22 +209,17 @@ def writerInTag():
     things = Things ()
     location = things.search_locations ()
 
-    # return render_template('/writer.html', tagAtiv = 'Aproxime a etiqueta para active')
+    # render_template('/writer.html', tagAtiv = 'Aproxime a etiqueta para active')
+    url_for('writer.html', tagAtiv = 'Aproxime a etiqueta para active')
     tag = start (str(numero))
 
 
     if tag == True:
         print "passou aqui !!!"
         return render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
-        # else:
-    # except Exception as e:
-    #     return render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
+    else:
+        return render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
 
-    # import subprocess
-
-    # processo = subprocess.call (["sudo python /home/pi/Documentos/python2/2T-s-Reader-Writer---Web-Python2/write_id.py", "26"], shell=True)
-
-    # print "Resultado" + str(processo)
 
     # return render_template ('/writer.html', msg="sucesso")
 

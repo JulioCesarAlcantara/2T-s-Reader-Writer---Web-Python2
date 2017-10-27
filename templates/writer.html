@@ -47,10 +47,12 @@
                           <input autofocus type="text" class="form-control" name="code1">
                             <br>
                           <select  name="location2" class="selectpicker form-control account-wall">
-                            <option value="0">Location ...</option>
-                            {%for loc in locations%}
-                            <option value="{{loc.loca_id}}">{{loc.loca_room}}</option>
-                            {%endfor%}
+                            {%if locations is defined%}
+                              <option value="0">Location ...</option>
+                              {%for loc in locations%}
+                              <option value="{{loc.loca_id}}">{{loc.loca_room}}</option>
+                              {%endfor%}
+                            {%endif%}
                           </select>
                         </div>
                     </div>
