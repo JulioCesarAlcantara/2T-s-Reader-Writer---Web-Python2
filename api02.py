@@ -232,9 +232,12 @@ def thingsTableReader():
         things = Things ()
         location = things.search_locations ()
 
-        print json.dumps (para_dict (location))
+        # print json.dumps (para_dict (location))
 
         resposta = startLeitura()
+
+        print "RESPOSTA ----"
+        print resposta
 
 
         if resposta == False:
@@ -242,6 +245,7 @@ def thingsTableReader():
         elif resposta == 0:
             return render_template ('/reader.html', locations=location, message="Erro de leitura")
         else:
+            array =[]
             array.append(resposta)
             return render_template ('/reader.html', locations=location, thingsdata=array)
     else:
