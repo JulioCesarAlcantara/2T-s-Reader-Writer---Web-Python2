@@ -199,6 +199,14 @@ def synchronize():
 
     return render_template ('/synchronize.html', things=list)
 
+@app.route('/tableRead', methods=['POST'])
+def saveThingsTableReader():
+    tabela =  request.form['tableReade']
+
+    print tabela
+
+    # return render_template ('/synchronize.html', things=list)
+
 @app.route('/writeTag', methods=['POST'])
 def writerInTag():
     numero = request.form['radioSelected']
