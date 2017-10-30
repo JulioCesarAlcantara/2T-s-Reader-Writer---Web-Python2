@@ -33,14 +33,14 @@ def startLeitura():
     # This loop keeps checking for chips. If one is near it will get the UID and authenticate
     while continue_reading:
         print "Aqui 2"
-        (status, TagType) = MIFAREReader.MFRC522_Request (MIFAREReader.PICC_REQIDL)
-
+        # (status, TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
+        print "Aqui 2.1"
         # If a card is found
-        if status == MIFAREReader.MI_OK:
-            print "Card detected"
+        # if status == MIFAREReader.MI_OK:
+        # print "Card detected"
 
         # Get the UID of the card
-        (status, uid) = MIFAREReader.MFRC522_Anticoll ()
+        (status, uid) = MIFAREReader.MFRC522_Anticoll()
 
         # If we have the UID, continue
         if status == MIFAREReader.MI_OK:
@@ -52,14 +52,14 @@ def startLeitura():
             key = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
 
             # Select the scanned tag
-            MIFAREReader.MFRC522_SelectTag (uid)
+            MIFAREReader.MFRC522_SelectTag(uid)
             print "Aqui 3"
             # Sector
             sectorBlock = 1
             # sectorBlock2 = 2
 
             # Authenticate
-            status = MIFAREReader.MFRC522_Auth (MIFAREReader.PICC_AUTHENT1A, sectorBlock, key, uid)
+            status = MIFAREReader.MFRC522_Auth(MIFAREReader.PICC_AUTHENT1A, sectorBlock, key, uid)
             print("-----------")
             print (uid)
             print "Aqui 4"
