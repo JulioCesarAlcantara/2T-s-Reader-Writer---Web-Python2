@@ -199,14 +199,6 @@ def synchronize():
 
     return render_template ('/synchronize.html', things=list)
 
-# @app.route('/tableRead', methods=['POST'])
-# def saveThingsTableReader():
-#     tabela =  request.form['tableReade']
-#
-#     print tabela
-#
-#     # return render_template ('/synchronize.html', things=list)
-
 @app.route('/writeTag', methods=['POST'])
 def writerInTag():
     numero = request.form['radioSelected']
@@ -240,7 +232,7 @@ def thingsTableReader():
         things = Things ()
         location = things.search_locations ()
 
-        # print json.dumps (para_dict (location))
+        print json.dumps (para_dict (location))
 
         resposta = startLeitura()
 
