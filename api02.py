@@ -240,7 +240,7 @@ def thingsTableReader():
         things = Things ()
         location = things.search_locations ()
 
-        print json.dumps (para_dict (location))
+        # print json.dumps (para_dict (location))
 
         resposta = startLeitura()
 
