@@ -39,7 +39,7 @@ class MFRC522:
   PICC_TRANSFER  = 0xB0
   PICC_HALT      = 0x50
   
-  MI_OK       = 1
+  MI_OK       = 0
   MI_NOTAGERR = 1
   MI_ERR      = 2
   
