@@ -23,7 +23,6 @@ def end_read(signal,frame):
 
 def startLeitura():
     continue_reading = True
-    print "Aqui 1"
     # Hook the SIGINT
     # signal.signal(signal.SIGINT, end_read)
     is_main_thread()
@@ -32,52 +31,50 @@ def startLeitura():
     array = []
     # This loop keeps checking for chips. If one is near it will get the UID and authenticate
     while continue_reading:
-        print "Aqui 2"
-        # (status, TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
-        print "Aqui 2.1"
+
+        (status, TagType) = MIFAREReader.MFRC522_Request (MIFAREReader.PICC_REQIDL)
+
         # If a card is found
-        # if status == MIFAREReader.MI_OK:
-        # print "Card detected"
+        if status == MIFAREReader.MI_OK:
+            print "Card detected"
 
         # Get the UID of the card
-        # (status, uid) = MIFAREReader.MFRC522_Anticoll()
-        #
-        # # If we have the UID, continue
-        # # if status == MIFAREReader.MI_OK:
-        #
-        #     # Print UID
-        #     # print "Card read UID: " + str (uid[0]) + "," + str (uid[1]) + "," + str (uid[2]) + "," + str (uid[3])
-        #
-        #     # This is the default key for authentication
-        #     # key = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
-        #
-        #     # Select the scanned tag
-        #     # MIFAREReader.MFRC522_SelectTag(uid)
-        # print "Aqui 3"
-        #     # Sector
-        sectorBlock = 1
-        #     # sectorBlock2 = 2
-        #
-        #     # Authenticate
-        #     # status = MIFAREReader.MFRC522_Auth(MIFAREReader.PICC_AUTHENT1A, sectorBlock, key, uid)
-        #     # print("-----------")
-        #     # print (uid)
-        # print "Aqui 4"
-        #
-        #     # Check if authenticated
-        #     # if status == MIFAREReader.MI_OK:
-        #         print "Aqui 5"
-        numero = MIFAREReader.MFRC522_Read (sectorBlock)
-        print "Aqui 6"
+        (status, uid) = MIFAREReader.MFRC522_Anticoll ()
 
-        things = Things()
-        print "Aqui 7"
+        # If we have the UID, continue
+        if status == MIFAREReader.MI_OK:
 
-        array.append(things.search_things_by_num2 (numero))
-        print "Aqui 8"
-        MIFAREReader.MFRC522_StopCrypto1 ()
+            # Print UID
+            print "Card read UID: " + str (uid[0]) + "," + str (uid[1]) + "," + str (uid[2]) + "," + str (uid[3])
+
+            # This is the default key for authentication
+            key = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
+
+            # Select the scanned tag
+            MIFAREReader.MFRC522_SelectTag (uid)
+
+            # Sector
+            sectorBlock = 1
+            # sectorBlock2 = 2
+
+            # Authenticate
+            status = MIFAREReader.MFRC522_Auth (MIFAREReader.PICC_AUTHENT1A, sectorBlock, key, uid)
+            print("-----------")
+            print (uid)
+
+            # Check if authenticated
+            if status == MIFAREReader.MI_OK:
+                numero = MIFAREReader.MFRC522_Read (sectorBlock)
+
+
+                things = Things()
+
+
+                array.append(things.search_things_by_num2 (numero))
+
+                MIFAREReader.MFRC522_StopCrypto1 ()
                 # thingsRead = json.dumps(para_dict(array))
-        print "Aqui 9"
+
 
 
                 # try:
@@ -89,11 +86,11 @@ def startLeitura():
                 # except Exception as e:
                 #     print "ERRO AQUI !!!"
                 #     return False
-            # else:
-            #     print "Não achou nada !!"
-            #     return 0
-    print "Aqui 10"
-    return array
+            else:
+                print "Não achou nada !!"
+                return 0
+
+        return array
 
 def is_main_thread():
     try:

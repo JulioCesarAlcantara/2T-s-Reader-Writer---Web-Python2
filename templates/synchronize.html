@@ -53,7 +53,7 @@
             <div class=' alert alert-info alert-dismissable fade in'><strong>Info!</strong> {{texto}}</div>
             {%endif%}
             -->
-
+<form action="testCheck" method="post">
       <div class="col-md-12">
          <div class="table-responsive">
             <table id="mytable" class="table table-bordred table-striped text-center">
@@ -67,7 +67,7 @@
                <tbody>
                {%for thing in things%}
                     <tr>
-                        <td><input type="checkbox" class="checkthis" value=""/></td>
+                        <td><input type="checkbox" name="extensions" class="checkthis" value="{{thing['code']}}"/></td>
                         <td>{{thing['code']}}</td>
                         <td>{{thing['name']}}</td>
                         <td>{{thing['location']}}</td>
@@ -90,6 +90,7 @@
             </div>
         </div>
   </div>
+</form>
 </div>
 
 </body>

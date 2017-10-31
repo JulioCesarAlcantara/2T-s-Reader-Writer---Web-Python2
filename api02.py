@@ -25,8 +25,8 @@ import os
 from Things import Things
 
 from User import User
-from write_id  import start
-from reader  import startLeitura
+# from write_id  import start
+# from reader  import startLeitura
 
 array = []
 
@@ -186,6 +186,16 @@ def listLocationWriter():
 
     return render_template ('/writer.html', locations=location)
 
+@app.route('/testCheck', methods=['POST'])
+def metodoTeste():
+    test=request.form.getlist('extensions')
+
+    print test[1]
+
+
+    return "<h1>Funcionou</h1>"
+
+
 @app.route('/synchronize', methods=['POST'])
 def synchronize():
     with open('sync.json') as json_data:
@@ -207,8 +217,8 @@ def writerInTag():
     location = things.search_locations ()
 
     # render_template('writer.html', tagAtiv = 'Aproxime a etiqueta para active')
-    tag = start (str(numero))
-
+    # tag = start (str(numero))
+    tag = True
 
     if tag == True:
         things = Things ()
@@ -234,8 +244,8 @@ def thingsTableReader():
 
         # print json.dumps (para_dict (location))
 
-        resposta = startLeitura()
-
+        # resposta = startLeitura()
+        resposta = True
         print "RESPOSTA ----"
         print resposta
 
@@ -245,8 +255,7 @@ def thingsTableReader():
         elif resposta == 0:
             return render_template ('/reader.html', locations=location, message="Erro de leitura")
         else:
-            # array =[]
-            # array.append(resposta)
+            # array =[]array.append(resposta)
             return render_template ('/reader.html', locations=location, thingsdata=resposta)
     else:
         msg = "Please, Select a Location to Read."
