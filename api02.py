@@ -254,12 +254,12 @@ def thingsTableReader():
         print resposta
 
 
-        if resposta == False:
+        if next(resposta) == False:
             return render_template ('/reader.html', locations=location, message="Error saving file.")
-        elif resposta == 0:
+        elif next(resposta) == 0:
             return render_template ('/reader.html', locations=location, message="Erro de leitura")
         else:
-            array = resposta
+            array.append(next(resposta))
             return render_template ('/reader.html', locations=location, thingsdata=array)
     else:
         msg = "Please, Select a Location to Read."
