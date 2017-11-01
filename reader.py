@@ -41,13 +41,13 @@ def startLeitura():
             print "Card detected"
 
         # Get the UID of the card
-        (status, uid) = MIFAREReader.MFRC522_Anticoll ()
-
+            (status, uid) = MIFAREReader.MFRC522_Anticoll ()
+            print "ok 4"
         # If we have the UID, continue
-        if status == MIFAREReader.MI_OK:
-
+        # if status == MIFAREReader.MI_OK:
+            print "ok 5"
             # Print UID
-            print "Card read UID: " + str (uid[0]) + "," + str (uid[1]) + "," + str (uid[2]) + "," + str (uid[3])
+            # print "Card read UID: " + str (uid[0]) + "," + str (uid[1]) + "," + str (uid[2]) + "," + str (uid[3])
 
             # This is the default key for authentication
             key = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
