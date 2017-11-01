@@ -353,7 +353,7 @@ class MFRC522:
       numero = convertendo2.convertToInteger(backData)
       print("Numero: ")
       print (numero)
-      yield numero
+      return numero
 #      return dados
 
       # try:
