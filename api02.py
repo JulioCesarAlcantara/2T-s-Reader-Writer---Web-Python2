@@ -89,6 +89,10 @@ def inicial():
 
     return redirect(url_for('index'))
 
+@app.route('/about')
+def about():
+    return render_template('/about.html')
+
 @app.before_request
 def beforerequest():
     g.user = None
@@ -255,7 +259,8 @@ def thingsTableReader():
         elif resposta == 0:
             return render_template ('/reader.html', locations=location, message="Erro de leitura")
         else:
-            # array =[]array.append(resposta)
+            # array =[]
+            # array.append(resposta)
             return render_template ('/reader.html', locations=location, thingsdata=resposta)
     else:
         msg = "Please, Select a Location to Read."
