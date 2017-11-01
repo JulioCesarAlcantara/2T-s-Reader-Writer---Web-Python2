@@ -95,7 +95,7 @@ def startLeitura():
             #     print "Não achou nada !!"
             #     return 0
 
-            yield array
+            yield ''.join(array)
 
 def is_main_thread():
     try:
