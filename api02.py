@@ -25,8 +25,8 @@ import os
 from Things import Things
 
 from User import User
-# from write_id  import start
-# from reader  import startLeitura
+from write_id  import start
+from reader  import startLeitura
 
 array = []
 
@@ -220,9 +220,9 @@ def writerInTag():
     things = Things ()
     location = things.search_locations ()
 
-    # render_template('writer.html', tagAtiv = 'Aproxime a etiqueta para active')
-    # tag = start (str(numero))
-    tag = True
+    # yield render_template('writer.html', tagAtiv = 'Aproxime a etiqueta para active')
+    tag = start (str(numero))
+    # tag = True
 
     if tag == True:
         things = Things ()
@@ -248,8 +248,8 @@ def thingsTableReader():
 
         # print json.dumps (para_dict (location))
 
-        # resposta = startLeitura()
-        resposta = True
+        resposta = startLeitura()
+        # resposta = True
         print "RESPOSTA ----"
         print resposta
 
@@ -259,9 +259,8 @@ def thingsTableReader():
         elif resposta == 0:
             return render_template ('/reader.html', locations=location, message="Erro de leitura")
         else:
-            # array =[]
-            # array.append(resposta)
-            return render_template ('/reader.html', locations=location, thingsdata=resposta)
+            array = resposta
+            return render_template ('/reader.html', locations=location, thingsdata=array)
     else:
         msg = "Please, Select a Location to Read."
         things = Things ()

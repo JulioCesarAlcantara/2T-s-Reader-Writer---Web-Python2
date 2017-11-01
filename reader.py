@@ -24,7 +24,8 @@ def end_read(signal,frame):
 def startLeitura():
     continue_reading = True
     # Hook the SIGINT
-    # signal.signal(signal.SIGINT, end_read)
+    signal.signal(signal.SIGINT, end_read)
+
     is_main_thread()
     # Create an object of the class MFRC522
     MIFAREReader = MFRC522.MFRC522()
