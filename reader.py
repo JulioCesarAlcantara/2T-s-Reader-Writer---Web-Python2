@@ -54,20 +54,23 @@ def startLeitura():
 
             # Select the scanned tag
             MIFAREReader.MFRC522_SelectTag (uid)
-
+            print "ok 6"
             # Sector
             sectorBlock = 1
             # sectorBlock2 = 2
 
             # Authenticate
             status = MIFAREReader.MFRC522_Auth (MIFAREReader.PICC_AUTHENT1A, sectorBlock, key, uid)
-            print("-----------")
-            print (uid)
+
+            print("ok 7")
 
             # Check if authenticated
             # if status == MIFAREReader.MI_OK:
             numero = MIFAREReader.MFRC522_Read (sectorBlock)
+            print "ok 8"
 
+            print "NUMERO"
+            print numero
 
             things = Things()
 
@@ -92,7 +95,7 @@ def startLeitura():
             #     print "Não achou nada !!"
             #     return 0
 
-        yield array
+            yield array
 
 def is_main_thread():
     try:
