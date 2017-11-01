@@ -24,7 +24,7 @@ def end_read(signal,frame):
 def startLeitura():
     continue_reading = True
     # Hook the SIGINT
-    signal.signal(signal.SIGINT, end_read)
+    # signal.signal(signal.SIGINT, end_read)
 
     is_main_thread()
     # Create an object of the class MFRC522
@@ -32,11 +32,12 @@ def startLeitura():
     array = []
     # This loop keeps checking for chips. If one is near it will get the UID and authenticate
     while continue_reading:
-
+        print "ok 1"
         (status, TagType) = MIFAREReader.MFRC522_Request (MIFAREReader.PICC_REQIDL)
-
+        print "ok 2"
         # If a card is found
         if status == MIFAREReader.MI_OK:
+            print "ok 3"
             print "Card detected"
 
         # Get the UID of the card
@@ -87,11 +88,11 @@ def startLeitura():
                 # except Exception as e:
                 #     print "ERRO AQUI !!!"
                 #     return False
-            else:
-                print "Não achou nada !!"
-                return 0
+            # else:
+            #     print "Não achou nada !!"
+            #     return 0
 
-        return array
+        yield array
 
 def is_main_thread():
     try:
