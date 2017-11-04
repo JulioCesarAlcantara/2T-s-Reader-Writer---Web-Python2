@@ -1,4 +1,4 @@
-from ThingsManager.ThingsModel import ThingsModel
+from ThingsModel import ThingsModel
 
 
 class ThingsXLocationModel(ThingsModel):

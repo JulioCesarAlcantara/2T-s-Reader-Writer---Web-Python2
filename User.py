@@ -40,7 +40,7 @@ class User(UserModel):
         finally:
             conn.close_connection()
 
-    def insert_new_user(self, name, email, password, token, permission='3'):
+    def insert_new_user(self, name, email, password, token, permission):
         try:
             sql = "INSERT INTO usuarios (usua_nome, usua_email, usua_senha, usua_permissao, usua_token) VALUES('" + str(
                 name) + "','" + str(email) + "','" + str(password) + "', '" + str(permission) + "','" + str(
