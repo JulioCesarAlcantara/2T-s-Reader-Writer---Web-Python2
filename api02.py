@@ -25,8 +25,8 @@ import os
 from Things import Things
 
 from User import User
-from write_id  import start
-from reader  import startLeitura
+# from write_id  import start
+# from reader  import startLeitura
 
 array = []
 
@@ -199,20 +199,6 @@ def metodoTeste():
 
     return "<h1>Funcionou</h1>"
 
-
-@app.route('/synchronize', methods=['POST'])
-def synchronize():
-    with open('sync.json') as json_data:
-        data = json.load(json_data)
-        list = []
-        for thing in data['Things']:
-            list.append(thing)
-
-        for t in list:
-            print(t['name'])
-
-    return render_template ('/synchronize.html', things=list)
-
 @app.route('/writeTag', methods=['POST'])
 def writerInTag():
     numero = request.form['radioSelected']
@@ -236,6 +222,57 @@ def writerInTag():
     else:
         return render_template ('/writer.html', erro="Could not Activate Tag. Contact the Analyst!", locations=location)
 
+@app.route('/synchronize', methods=['POST'])
+def synchronize():
+    with open('sync.json') as json_data:
+        data = json.load(json_data)
+        list = []
+        for thing in data['Things']:
+            list.append(thing)
+
+    return render_template ('/synchronize.html', things=list)
+
+@app.route('/tableRead', methods=['POST'])
+def tableRead():
+    arraySync = request.form.getlist('arraySync')
+    things = Things()
+    arrayThings = []
+
+    for numero in arraySync:
+        arrayThings.append(things.search_things_by_num2(numero))
+    print(arrayThings)
+
+    #abre o json para salvar em uma lista o que ja esta gravado
+    with open('sync.json') as json_data:
+        data = json.load(json_data)
+        list = []
+        for thing in data['Things']:
+            list.append(thing) #lista com os arquivos do json
+
+    texto = None
+    arq = open('sync.json', 'w')
+    inicio = "{\n\n\"Things\":[\n\n";
+    arq.write(inicio);
+
+    #insere no novo arquivo os antigos
+    for antigo in list:
+        text = json.dumps(para_dict(antigo))
+        arq.write(text +",\n")
+
+    tamanho = (len(arrayThings))
+    for thing in arrayThings:
+        if (tamanho == 1):
+            texto = json.dumps(para_dict(thing))
+            arq.write(texto)
+            tamanho = tamanho - 1
+        else:
+            texto = json.dumps(para_dict(thing))
+            arq.write(texto + ",\n")
+            tamanho = tamanho - 1
+    arq.write("\n\n]\n}")
+    arq.close()
+    return render_template('/reader.html')
+
 
 @app.route('/readerLoc', methods=['POST'])
 def thingsTableReader():
@@ -248,19 +285,37 @@ def thingsTableReader():
 
         # print json.dumps (para_dict (location))
 
-        resposta = startLeitura()
-        # resposta = True
+        # resposta = startLeitura()
+        resposta = True
         print "RESPOSTA ----"
-        print next(resposta)
+        print resposta
 
 
-        if next(resposta) == False:
+        if resposta == False:
             return render_template ('/reader.html', locations=location, message="Error saving file.")
-        elif next(resposta) == 0:
+        elif resposta == 0:
             return render_template ('/reader.html', locations=location, message="Erro de leitura")
         else:
-            # array = next(resposta)
-            return render_template ('/reader.html', locations=location, thingsdata=next(resposta))
+
+            things = Things()
+            # texto = None
+            array = things.search_things_actives_by_location(loca_id)
+            # arq = open('sync.json', 'w')
+            # inicio = "{\n\n\"Things\":[\n\n";
+            # arq.write(inicio);
+            # tamanho = (len(array))
+            # for thing in array:
+            #     if(tamanho == 1):
+            #         texto = json.dumps(para_dict(thing))
+            #         arq.write(texto)
+            #         tamanho = tamanho - 1
+            #     else:
+            #         texto = json.dumps(para_dict(thing))
+            #         arq.write(texto + ",\n")
+            #         tamanho = tamanho - 1
+            # arq.write("\n\n]\n}")
+            # arq.close()
+            return render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .", locations=location, thingsdata=array)
     else:
         msg = "Please, Select a Location to Read."
         things = Things ()

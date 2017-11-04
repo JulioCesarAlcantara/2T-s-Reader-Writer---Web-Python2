@@ -67,10 +67,10 @@
                <tbody>
                {%for thing in things%}
                     <tr>
-                        <td><input type="checkbox" name="extensions" class="checkthis" value="{{thing['code']}}"/></td>
-                        <td>{{thing['code']}}</td>
-                        <td>{{thing['name']}}</td>
-                        <td>{{thing['location']}}</td>
+                        <td><input type="checkbox" name="extensions" class="checkthis" value="{{thing['nr_things1']}}"/></td>
+                        <td>{{thing.nr_things1}}</td>
+                        <td>{{thing.description}}</td>
+                        <td>{{thing.location.loca_room}}</td>
 
                     </tr>
                {%endfor%}

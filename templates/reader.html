@@ -86,9 +86,10 @@
                                <tbody>
                                     {%for things in thingsdata%}
                                     <tr align="center">
+                                        <input type="hidden" name="arraySync" value="{{things['nr_things1']}}">
                                         <td>{{things.nr_things1}}</td>
                                         <td>{{things.description}}</td>
-                                        <td>{{things.loca_room}}</td>
+                                        <td>{{things.location.loca_room}}</td>
                                     </tr>
                                     {%endfor%}
                                {%endif%}

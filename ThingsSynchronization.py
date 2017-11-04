@@ -1,5 +1,7 @@
-from ThingsManager.Things import Things
+import requests
+from Things import Things
 
+from ThingsModel import ThingsModel
 from ThingsXLocation import ThingsXLocation
 
 
@@ -70,3 +72,23 @@ class ThingsSynchronization(object):
             return 'Codigo da coisa inexistente'
         else:
             return 'Ocorreu um erro ao verificar se a coisa existe'
+
+    def synchronizationThings(Token, Location, nThings):
+        try:
+            url = "https://dg-2ts-server.herokuapp.com/"
+            response = requests.get(
+                url + "synchronize_location/token=" + Token + "&locaid=" + Location + "&num=" + nThings)
+            data = response.json()
+
+            if response.ok:
+                try:
+                    if data["response"] == None:
+                        print("Aqui")
+                    else:
+                        print(data["response"])
+                except Exception as e:
+                    u = ThingsModel(**data)
+                    print (u.token)
+
+        except Exception as e:
+            print ("Erro no Servidor")
