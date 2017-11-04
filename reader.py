@@ -76,6 +76,7 @@ def startLeitura():
 
 
             array.append(things.search_things_by_num2 (numero))
+            yield array
 
             MIFAREReader.MFRC522_StopCrypto1 ()
             # thingsRead = json.dumps(para_dict(array))
@@ -95,7 +96,7 @@ def startLeitura():
             #     print "Não achou nada !!"
             #     return 0
 
-            yield array
+
 
 def is_main_thread():
     try:
