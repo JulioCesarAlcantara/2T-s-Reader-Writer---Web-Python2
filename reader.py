@@ -7,6 +7,7 @@ from flask import render_template
 
 import MFRC522
 import signal
+from SignalSond import emiteSom
 
 
 
@@ -72,6 +73,8 @@ def startLeitura():
             print "NUMERO"
             print numero
 
+            emiteSom()
+
             things = Things()
 
             # return False
@@ -79,27 +82,7 @@ def startLeitura():
 
             MIFAREReader.MFRC522_StopCrypto1 ()
 
-            for i in array:
-                 print i.location
-
             yield array
-
-            # thingsRead = json.dumps(para_dict(array))
-
-
-
-                # try:
-                #     arquivo = open ('listRead.json', "w")
-                #     arquivo.write(thingsRead)
-                #     arquivo.close()
-                #     print "SUCESSO"
-                #     return array
-                # except Exception as e:
-                #     print "ERRO AQUI !!!"
-                #     return False
-            # else:
-            #     print "Não achou nada !!"
-            #     return 0
 
 
 
