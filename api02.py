@@ -25,8 +25,8 @@ import os
 from Things import Things
 
 from User import User
-# from write_id  import start
-# from reader  import startLeitura
+from write_id  import start
+from reader  import startLeitura
 
 array = []
 
@@ -285,8 +285,8 @@ def thingsTableReader():
 
         # print json.dumps (para_dict (location))
 
-        # resposta = startLeitura()
-        resposta = True
+        resposta = startLeitura()
+        # resposta = True
         print "RESPOSTA ----"
         print resposta
 
@@ -297,9 +297,9 @@ def thingsTableReader():
             return render_template ('/reader.html', locations=location, message="Erro de leitura")
         else:
 
-            things = Things()
+            # things = Things()
             # texto = None
-            array = things.search_things_actives_by_location(loca_id)
+            # array = things.search_things_actives_by_location(loca_id)
             # arq = open('sync.json', 'w')
             # inicio = "{\n\n\"Things\":[\n\n";
             # arq.write(inicio);
@@ -315,7 +315,7 @@ def thingsTableReader():
             #         tamanho = tamanho - 1
             # arq.write("\n\n]\n}")
             # arq.close()
-            return render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .", locations=location, thingsdata=array)
+            return render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .", locations=location, thingsdata=resposta)
     else:
         msg = "Please, Select a Location to Read."
         things = Things ()
