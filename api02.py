@@ -288,13 +288,14 @@ def thingsTableReader():
         # while True:
         resposta = startLeitura()
 
+
         print "RESPOSTA ----"
         print resposta
 
 
         if next(resposta) == False:
             return render_template ('/reader.html', locations=location, message="Error saving file.")
-        elif next(resposta) == 0:
+        elif next(resposta) == "Tag already read !!":
             return render_template ('/reader.html', locations=location, message="Erro de leitura")
         else:
 

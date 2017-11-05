@@ -7,13 +7,14 @@ from flask import render_template
 
 import MFRC522
 import signal
-from SignalSond import emiteSom
+from SignalSond import *
 
 
 
 # Capture SIGINT for cleanup when the script is aborted
 from Things import Things
 
+continue_reading
 
 def end_read(signal,frame):
 
@@ -73,13 +74,16 @@ def startLeitura():
             print "NUMERO"
             print numero
 
-            emiteSom()
+            emiteSomOk()
 
             things = Things()
 
             # return False
-            array.append(things.search_things_by_num2 (numero))
-
+            if things.search_things_by_num2 (numero) not in array:
+                array.append(things.search_things_by_num2 (numero))
+            else:
+                emiteSomErro()
+                # yield "Tag already read !!"
             MIFAREReader.MFRC522_StopCrypto1 ()
 
             yield array
