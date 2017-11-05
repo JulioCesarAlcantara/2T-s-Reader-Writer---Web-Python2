@@ -284,45 +284,45 @@ def thingsTableReader():
         location = things.search_locations ()
 
         # print json.dumps (para_dict (location))
-
         while True:
-            resposta = startLeitura()
-        # resposta = True
-            print "RESPOSTA ----"
-            print resposta
+            while True:
+                resposta = startLeitura()
+            # resposta = True
+                print "RESPOSTA ----"
+                print resposta
 
 
-            if resposta == False:
-                yield render_template ('/reader.html', locations=location, message="Error saving file.")
-            elif resposta == 0:
-                yield render_template ('/reader.html', locations=location, message="Erro de leitura")
-            else:
+                if resposta == False:
+                    return render_template ('/reader.html', locations=location, message="Error saving file.")
+                elif resposta == 0:
+                    return render_template ('/reader.html', locations=location, message="Erro de leitura")
+                else:
 
-            # things = Things()
-            # texto = None
-            # array = things.search_things_actives_by_location(loca_id)
-            # arq = open('sync.json', 'w')
-            # inicio = "{\n\n\"Things\":[\n\n";
-            # arq.write(inicio);
-            # tamanho = (len(array))
-            # for thing in array:
-            #     if(tamanho == 1):
-            #         texto = json.dumps(para_dict(thing))
-            #         arq.write(texto)
-            #         tamanho = tamanho - 1
-            #     else:
-            #         texto = json.dumps(para_dict(thing))
-            #         arq.write(texto + ",\n")
-            #         tamanho = tamanho - 1
-            # arq.write("\n\n]\n}")
-            # arq.close()
-                yield render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .",locations=location, thingsdata=resposta)
-        # return render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .", locations=location, thingsdata=resposta)
+                # things = Things()
+                # texto = None
+                # array = things.search_things_actives_by_location(loca_id)
+                # arq = open('sync.json', 'w')
+                # inicio = "{\n\n\"Things\":[\n\n";
+                # arq.write(inicio);
+                # tamanho = (len(array))
+                # for thing in array:
+                #     if(tamanho == 1):
+                #         texto = json.dumps(para_dict(thing))
+                #         arq.write(texto)
+                #         tamanho = tamanho - 1
+                #     else:
+                #         texto = json.dumps(para_dict(thing))
+                #         arq.write(texto + ",\n")
+                #         tamanho = tamanho - 1
+                # arq.write("\n\n]\n}")
+                # arq.close()
+                    return render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .",locations=location, thingsdata=resposta)
+            # return render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .",locations=location, thingsdata=resposta)
     else:
         msg = "Please, Select a Location to Read."
         things = Things ()
         location = things.search_locations ()
-        yield render_template ('/reader.html', locations=location, message=msg)
+        return render_template ('/reader.html', locations=location, message=msg)
 
 @app.route('/writeCon', methods=['POST'])
 def thingsTableWriter():
