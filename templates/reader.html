@@ -85,12 +85,22 @@
                                </thead>
                                <tbody>
                                     {%for things in thingsdata%}
-                                    <tr align="center">
-                                        <input type="hidden" name="arraySync" value="{{things['nr_things1']}}">
-                                        <td>{{things.nr_things1}}</td>
-                                        <td>{{things.description}}</td>
-                                        <td>{{things.location.loca_room}}</td>
-                                    </tr>
+                                        {%if locationId == things.location.loca_id%}
+                                            <tr align="center">
+                                                <input type="hidden" name="arraySync" value="{{things['nr_things1']}}">
+                                                <td>{{things.nr_things1}}</td>
+                                                <td>{{things.description}}</td>
+                                                <td>{{things.location.loca_room}}</td>
+                                            </tr>
+                                        {%endif%}
+                                        {%if locationId != things.location.loca_id %}
+                                            <tr align="center" bgcolor="red">
+                                                <input type="hidden" name="arraySync" value="{{things['nr_things1']}}">
+                                                <td>{{things.nr_things1}}</td>
+                                                <td>{{things.description}}</td>
+                                                <td>{{things.location.loca_room}}</td>
+                                            </tr>
+                                        {%endif%}
                                     {%endfor%}
                                {%endif%}
                                 </tbody>

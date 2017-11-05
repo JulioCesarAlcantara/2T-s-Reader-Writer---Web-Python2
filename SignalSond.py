@@ -12,5 +12,5 @@ def emiteSomErro():
 
 def emiteSomLogin():
     pygame.mixer.init()
-    pygame.mixer.music.load('login.wav')
+    pygame.mixer.music.load('login .wav')
     pygame.mixer.music.play()
