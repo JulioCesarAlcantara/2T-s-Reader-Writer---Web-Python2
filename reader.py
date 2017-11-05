@@ -74,7 +74,7 @@ def startLeitura():
 
             things = Things()
 
-            return False
+            # return False
             array.append(things.search_things_by_num2 (numero))
 
             MIFAREReader.MFRC522_StopCrypto1 ()
