@@ -275,36 +275,26 @@ def tableRead():
 
 
 @app.route('/readerLoc', methods=['POST'])
-def readerExecute():
+def thingsTableReader():
+
     loca_id = request.form['location1']
 
     if loca_id != "0":
         things = Things ()
         location = things.search_locations ()
 
-        for i in range(0,4):
-            resp = thingsTableReader(location)
-            return render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .",
-                                    locations=location, thingsdata=resp)
-            continue
-        return render_template('/reader.html')
-    else:
-        msg = "Please, Select a Location to Read."
-        things = Things ()
-        location = things.search_locations ()
-        return render_template ('/reader.html', locations=location, message=msg)
+        # print json.dumps (para_dict (location))
 
-def thingsTableReader(location):
-
+        # while True:
         resposta = startLeitura()
 
         print "RESPOSTA ----"
-        print resposta
+        print next(resposta)
 
 
-        if resposta == False:
+        if next(resposta) == False:
             return render_template ('/reader.html', locations=location, message="Error saving file.")
-        elif resposta == 0:
+        elif next(resposta) == 0:
             return render_template ('/reader.html', locations=location, message="Erro de leitura")
         else:
 
@@ -326,11 +316,13 @@ def thingsTableReader(location):
         #         tamanho = tamanho - 1
         # arq.write("\n\n]\n}")
              # arq.close()
-            print "Chegou aqui !!!!"
-            # return render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .",locations=location, thingsdata=resposta)
-            return resposta
-            print "Chegou aqui 2222"
+            redirect ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .",locations=location, thingsdata=next(resposta))
 
+    else:
+        msg = "Please, Select a Location to Read."
+        things = Things ()
+        location = things.search_locations ()
+        return render_template ('/reader.html', locations=location, message=msg)
 
 @app.route('/writeCon', methods=['POST'])
 def thingsTableWriter():
