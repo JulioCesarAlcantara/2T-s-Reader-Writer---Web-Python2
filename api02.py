@@ -286,7 +286,7 @@ def readerExecute():
             resp = thingsTableReader(location)
             return render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .",
                                     locations=location, thingsdata=resp)
-            # continue
+            continue
         return render_template('/reader.html')
     else:
         msg = "Please, Select a Location to Read."
