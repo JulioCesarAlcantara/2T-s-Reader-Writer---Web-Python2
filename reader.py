@@ -14,8 +14,6 @@ from SignalSond import *
 # Capture SIGINT for cleanup when the script is aborted
 from Things import Things
 
-continue_reading
-
 def end_read(signal,frame):
 
     global continue_reading
