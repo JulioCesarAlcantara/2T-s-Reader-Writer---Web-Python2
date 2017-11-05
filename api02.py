@@ -289,7 +289,7 @@ def thingsTableReader():
         resposta = startLeitura()
 
         print "RESPOSTA ----"
-        print next(resposta)
+        print resposta
 
 
         if next(resposta) == False:

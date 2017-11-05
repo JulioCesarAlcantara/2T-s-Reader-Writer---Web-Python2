@@ -78,6 +78,10 @@ def startLeitura():
             array.append(things.search_things_by_num2 (numero))
 
             MIFAREReader.MFRC522_StopCrypto1 ()
+
+            for i in array:
+                 print i.location
+
             yield array
 
             # thingsRead = json.dumps(para_dict(array))
