@@ -271,7 +271,7 @@ def tableRead():
             tamanho = tamanho - 1
     arq.write("\n\n]\n}")
     arq.close()
-    return render_template('/reader.html')
+    return render_template('/reader.html', textoSuccess = "Saved Successfully. Please, Synchronize Things !")
 
 
 @app.route('/readerLoc', methods=['POST'])
@@ -314,7 +314,7 @@ def thingsTableReader():
         #         tamanho = tamanho - 1
         # arq.write("\n\n]\n}")
              # arq.close()
-            return render_template('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .",locationId = loca_id, locations=location, thingsdata=next(resposta))
+            return render_template('/reader.html',locationId = loca_id, locations=location, thingsdata=next(resposta))
 
     else:
         msg = "Please, Select a Location to Read."

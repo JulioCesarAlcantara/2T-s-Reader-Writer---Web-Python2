@@ -96,6 +96,7 @@
                                         {%if locationId != things.location.loca_id %}
                                             <tr align="center">
                                                 <input type="hidden" name="arraySync" value="{{things['nr_things1']}}">
+                                                <input type="hidden" name="arraySyncLoc" value="{{locationId}}">
                                                 <td><font color="#FF0000">{{things.nr_things1}}</font></td>
                                                 <td><font color="#FF0000">{{things.description}}</font></td>
                                                 <td><font color="#FF0000">{{things.location.loca_room}}</font></td>
@@ -118,14 +119,12 @@
                         </div>
                     </div>
 
-                    {%if message is defined%}
-                    <div class=' alert alert-danger alert-dismissable fade in'><strong>Info!</strong> {{message}}</div>
+                    {%if textoSuccess is defined%}
+                    <div class=' alert alert-success alert-dismissable fade in'><strong>Success!</strong> {{textoSuccess}}</div>
                     {%endif%}
                 </div>
             </div>
         </form>
-
-
 
 </div>
 </body>
