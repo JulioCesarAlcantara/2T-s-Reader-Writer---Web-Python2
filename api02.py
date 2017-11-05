@@ -282,9 +282,11 @@ def readerExecute():
         things = Things ()
         location = things.search_locations ()
 
-        while True:
-            thingsTableReader(location)
-
+        for i in range(0,4):
+            resp = thingsTableReader(location)
+            return render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .",
+                                    locations=location, thingsdata=resp)
+            continue
         return render_template('/reader.html')
     else:
         msg = "Please, Select a Location to Read."
@@ -326,6 +328,7 @@ def thingsTableReader(location):
              # arq.close()
             print "Chegou aqui !!!!"
             return render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .",locations=location, thingsdata=resposta)
+            return resposta
             print "Chegou aqui 2222"
 
 
