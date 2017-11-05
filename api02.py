@@ -316,7 +316,7 @@ def thingsTableReader():
         #         tamanho = tamanho - 1
         # arq.write("\n\n]\n}")
              # arq.close()
-            redirect ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .",locations=location, thingsdata=next(resposta))
+            return render_template('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .",locations=location, thingsdata=next(resposta))
 
     else:
         msg = "Please, Select a Location to Read."
