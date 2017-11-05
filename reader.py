@@ -74,13 +74,14 @@ def startLeitura():
             print "NUMERO"
             print numero
 
-            emiteSomOk()
+
 
             things = Things()
 
             # return False
             if things.search_things_by_num2 (numero) not in array:
                 array.append(things.search_things_by_num2 (numero))
+                emiteSomOk ()
             else:
                 emiteSomErro()
                 # yield "Tag already read !!"
