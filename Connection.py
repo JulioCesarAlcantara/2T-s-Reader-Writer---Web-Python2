@@ -1,5 +1,9 @@
 import pymysql
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 
 class Connection(object):
     #__server = 'sql10.freemysqlhosting.net'
@@ -13,7 +17,7 @@ class Connection(object):
 
     def __init__(self):
         self.db = pymysql.connect(host = Connection.__server, port = 3306, user = Connection.__user, passwd = Connection.__password, db = Connection.__database, charset='utf8',
-use_unicode=True)
+use_unicode=False)
         self.cursor = self.db.cursor()
         print('Connected in database '+Connection.__database)
 

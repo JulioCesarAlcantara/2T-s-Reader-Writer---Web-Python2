@@ -1,11 +1,5 @@
 import requests
-# from flask import app, jsonify, json
-
-from LocationModel import LocationModel
-from Things import Things
-from ThingsModel import ThingsModel
-from ThingsXLocationModel import ThingsXLocationModel
-from User import User
+from Connection import Connection
 
 # @app.route('/get_locations_db/token=<string:token>', methods=['GET'])
 # def get_locations_db(token):
@@ -15,27 +9,21 @@ from User import User
 #     location = Locations()
 #     return json.dumps(para_dict(location.get_all_locations_db()))
 
-def getLocations(token):
+def getLocations():
 
     try:
         url = "https://dg-2ts-server.herokuapp.com/"
-        response = requests.get (url + "get_locations_db/token=" + token)
-        data = response.json ()
+        response = requests.get (url + "get_locations_db/token=123")
 
         if response.ok:
-            try:
-                if data["response"] == None:
-                    print ("Aqui")
-                else:
-                    print (data["response"])
-            except Exception as e:
-                locations = []
-                for dados in data:
-                    locations.append(LocationModel(**dados))
+            print response.text + "\n\n"
+            return response.text
+        else:
+            return False
 
-                return locations
     except Exception as e:
         print ("Erro no Servidor")
+        return 0
 
 #
 # @app.route('/get_things_db/token=<string:token>', methods=['GET'])
@@ -47,28 +35,21 @@ def getLocations(token):
 #
 #     return json.dumps(para_dict(things.get_all_things_db()))
 #
-def getThings(token):
+def getThings():
 
     try:
         url = "https://dg-2ts-server.herokuapp.com/"
-        response = requests.get (url + "get_things_db/token=" + token)
-        data = response.json ()
+        response = requests.get (url + "get_things_db/token=123")
 
         if response.ok:
-            try:
-                if data["response"] == None:
-                    print ("Aqui")
-                else:
-                    print (data["response"])
-            except Exception as e:
-                Things = []
-                for dados in data:
-                    Things.append (ThingsModel (**dados))
+            print response.text + "\n\n"
+            return response.text
+        else:
+            return False
 
-                return Things
     except Exception as e:
         print ("Erro no Servidor")
-
+        return 0
 # a = getThings('123')
 #
 # for b in a:
@@ -85,28 +66,20 @@ def getThings(token):
 #     return json.dumps(para_dict(things_location.get_things_x_location_db()))
 #
 
-def getThingsLocations(token):
+def getThingsLocations():
 
     try:
         url = "https://dg-2ts-server.herokuapp.com/"
-        response = requests.get (url + "get_things_location_db/token=" + token)
-        data = response.json ()
+        response = requests.get (url + "get_things_location_db/token=123")
 
         if response.ok:
-            try:
-                if data["response"] == None:
-                    print ("Aqui")
-                else:
-                    print (data["response"])
-            except Exception as e:
-                ThingsLoc = []
-                for dados in data:
-                    ThingsLoc.append (ThingsXLocationModel (**dados))
-
-                return ThingsLoc
+            print response.text + "\n\n"
+            return response.text
+        else:
+            return False
     except Exception as e:
         print ("Erro no Servidor")
-
+        return 0
 #
 # @app.route('/get_users_db/token=<string:token>', methods=['GET'])
 # def get_users_db(token):
@@ -117,64 +90,153 @@ def getThingsLocations(token):
 #
 #     return json.dumps(para_dict(user.get_users_db()))
 
-def getUsers(token):
+def getUsers():
 
     try:
         url = "https://dg-2ts-server.herokuapp.com/"
-        response = requests.get (url + "get_users_db/token=" + token)
-        print url + "get_users_db/token=" + token
-        data = response.json ()
+        response = requests.get (url + "get_users_db/token=123")
 
         if response.ok:
-            try:
-                if data["response"] == None:
-                    print ("Aqui")
-                else:
-                    print (data["response"])
-            except Exception as e:
-                Users = []
-                for dados in data:
-                    Users.append (User (**dados))
-
-                return Users
+            print response.text + "\n\n"
+            return response.text
+        else:
+            return False
     except Exception as e:
         print ("Erro no Servidor")
+        return 0
 
-def synchronizeBdLocal():
-    token_bd = '123'
-    things = Things ()
-    user = User()
-    locationsServer = getLocations(token_bd)
-    thingServer = getThings(token_bd)
-    thingsLocationServer = getThingsLocations(token_bd)
-    userServer = []
-    userServer =getUsers(token_bd)
+def updateBdThingsLocation():
+    location = getLocations()
+    users = getUsers()
+    things = getThings()
+    thingsLocation = getThingsLocations()
 
-    arrayIdServer = []
-    for a in userServer:
-        a.id = "0"
-        arrayIdServer.append(a)
+    if thingsLocation == False:
+        print "Erro ao buscar dados de coisas na localizacao. Contate o analista"
+    elif thingsLocation == 0:
+        print "Erro no servidor"
+    else:
+        try:
+            print "Deletando tabela de bens x localizacao ..."
+            sql = "DELETE FROM `patr_bens_x_localizacao`"
+            conn = Connection()
+            conn.execute_sql(sql)
+            conn.commit()
+            print "bens x localizacao excluida com sucesso !!"
 
-        print a.id
+            print "Deletando tabela de usuarios ... "
+            sql = "DELETE FROM `usuarios`"
+            conn = Connection ()
+            conn.execute_sql (sql)
+            conn.commit ()
+            print "tabela de usuarios excluida com sucesso !!"
 
+            print "Deletando tabela de bens ..."
+            sql = "DELETE FROM `patr_bens`"
+            conn = Connection ()
+            conn.execute_sql (sql)
+            conn.commit ()
+            print "Tabela de bens excluida com sucesso !!"
 
-    userLocal = []
-    locationsLocal = things.search_locations ()
-    thingLocal = things.search_all_things()
-    userLocal=user.search_all_users()
+            print "Deletando tabela de localizacoes ..."
+            sql = "DELETE FROM `localizacao`"
+            conn = Connection ()
+            conn.execute_sql (sql)
+            conn.commit ()
+            print "Tabela de localizacoes excluida com sucesso !!"
 
-    arrayIdLocal = []
-    for a in userLocal:
-        a.id = "0"
-        arrayIdLocal.append (a)
+            print "Inserindo usuarios ..."
+            sql = str(users)
+            conn = Connection()
+            conn.execute_sql(sql)
+            conn.commit ()
+            print "Usuarios inseridos com sucesso !! "
 
-        print a.id
+            print "Inserindo localizacoes ..."
+            sql = str(location)
+            conn = Connection()
+            conn.execute_sql(sql)
+            conn.commit()
+            print "Localizacoes inseridas com sucesso !!"
 
-    arrayUser = []
-    for i in range(len(userServer)):
-            if arrayIdServer[i] not in arrayIdLocal:
-                for users in arrayIdServer:
-                    user.insert_new_user(users.name, users.email, users.password, users.token, users.permission)
+            print "Inserindo Coisas ..."
+            sql = str (things)
+            conn = Connection ()
+            conn.execute_sql (sql)
+            conn.commit ()
+            print "Coisas inseridas com sucesso !!"
 
+            print "Inserindo coisas nas localizacoes ..."
+            sql = str (thingsLocation)
+            conn = Connection ()
+            conn.execute_sql (sql)
+            conn.commit ()
+            print "Coisas inseridas nas localizacoes com sucesso !!"
 
-synchronizeBdLocal()
+            print "Deu Certo !!!"
+        except Exception as e:
+            conn.rollback()
+            print(e)
+            print "Deu errado !!!"
+        finally:
+            conn.close_connection()
+
+updateBdThingsLocation()
+
+# def updateBdUsers():
+#     location = getLocations()
+#     users = getUsers()
+#     things = getThings()
+#
+#     if users == False:
+#         print "Erro ao buscar dados de usuarios no servidor. Contate o analista"
+#     elif users == 0:
+#         print "Erro no servidor"
+#     else:
+#         try:
+#             sql = "DELETE FROM `usuarios`"
+#             conn = Connection()
+#             conn.execute_sql(sql)
+#             conn.commit()
+#
+#             sql = str(users)
+#             conn = Connection ()
+#             conn.execute_sql (sql)
+#             conn.commit ()
+#
+#             print "Deu Certo !!!"
+#         except Exception as e:
+#             conn.rollback()
+#             print(e)
+#             print "Deu errado !!!"
+#         finally:
+#             conn.close_connection()
+#
+# def updateBdUsers():
+#     location = getLocations()
+#     users = getUsers()
+#     things = getThings()
+#
+#     if users == False:
+#         print "Erro ao buscar dados de usuarios no servidor. Contate o analista"
+#     elif users == 0:
+#         print "Erro no servidor"
+#     else:
+#         try:
+#             sql = "DELETE FROM `usuarios`"
+#             conn = Connection()
+#             conn.execute_sql(sql)
+#             conn.commit()
+#
+#             sql = str(users)
+#             conn = Connection ()
+#             conn.execute_sql (sql)
+#             conn.commit ()
+#
+#             print "Deu Certo !!!"
+#         except Exception as e:
+#             conn.rollback()
+#             print(e)
+#             print "Deu errado !!!"
+#         finally:
+#             conn.close_connection()
