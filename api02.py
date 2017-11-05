@@ -293,9 +293,9 @@ def thingsTableReader():
 
 
             if resposta == False:
-                return render_template ('/reader.html', locations=location, message="Error saving file.")
+                yield render_template ('/reader.html', locations=location, message="Error saving file.")
             elif resposta == 0:
-                return render_template ('/reader.html', locations=location, message="Erro de leitura")
+                yield render_template ('/reader.html', locations=location, message="Erro de leitura")
             else:
 
             # things = Things()
@@ -316,13 +316,13 @@ def thingsTableReader():
             #         tamanho = tamanho - 1
             # arq.write("\n\n]\n}")
             # arq.close()
-                render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .",locations=location, thingsdata=resposta)
-        return render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .", locations=location, thingsdata=resposta)
+                yield render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .",locations=location, thingsdata=resposta)
+        # return render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .", locations=location, thingsdata=resposta)
     else:
         msg = "Please, Select a Location to Read."
         things = Things ()
         location = things.search_locations ()
-        return render_template ('/reader.html', locations=location, message=msg)
+        yield render_template ('/reader.html', locations=location, message=msg)
 
 @app.route('/writeCon', methods=['POST'])
 def thingsTableWriter():
