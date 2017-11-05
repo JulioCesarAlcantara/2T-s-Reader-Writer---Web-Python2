@@ -285,17 +285,18 @@ def thingsTableReader():
 
         # print json.dumps (para_dict (location))
 
-        resposta = startLeitura()
+        while True:
+            resposta = startLeitura()
         # resposta = True
-        print "RESPOSTA ----"
-        print resposta
+            print "RESPOSTA ----"
+            print resposta
 
 
-        if resposta == False:
-            return render_template ('/reader.html', locations=location, message="Error saving file.")
-        elif resposta == 0:
-            return render_template ('/reader.html', locations=location, message="Erro de leitura")
-        else:
+            if resposta == False:
+                return render_template ('/reader.html', locations=location, message="Error saving file.")
+            elif resposta == 0:
+                return render_template ('/reader.html', locations=location, message="Erro de leitura")
+            else:
 
             # things = Things()
             # texto = None
@@ -315,7 +316,7 @@ def thingsTableReader():
             #         tamanho = tamanho - 1
             # arq.write("\n\n]\n}")
             # arq.close()
-            return render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .", locations=location, thingsdata=resposta)
+                return render_template ('/reader.html', texto="Approach the reader to the tag . . . Waiting . . .", locations=location, thingsdata=resposta)
     else:
         msg = "Please, Select a Location to Read."
         things = Things ()
