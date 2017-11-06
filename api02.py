@@ -26,9 +26,8 @@ from Things import Things
 from ThingsSynchronization import ThingsSynchronization
 
 from User import User
-#from write_id  import start
-#from reader  import startLeitura
-from testeSync import testeSync
+from write_id  import start
+from reader  import startLeitura
 
 array = []
 
