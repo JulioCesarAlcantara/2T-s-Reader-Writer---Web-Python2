@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2Ts Reader/Writer</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body>
+<br><br>
+    <div class="container">
+        <div class="row">
+             <center><strong><h1>Atualizando Banco de Dados Local</h1></strong></center>
+        </div>
+        <div class="row">
+            <center><img src="/static/Images/imagem2.gif" height="300" width="450" border="0" alt="Descrição do logotipo do site"></center>
+        </div>
+        {%if html is defined%}
+            {%for acao in html%}
+                <div class="row">
+                    <center><strong><h1>{{acao}}</h1></strong></center>
+                </div>
+            {%endfor%}
+        {%endif%}
+        <div class="row">
+             <center><strong><h1>2Ts Reader/Writer</h1></strong></center>
+        </div>
+    </div>
+
+</body>
+</html>
