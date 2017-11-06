@@ -1,5 +1,9 @@
-from DatabaseManager.Connection import Connection
-from ThingsManager.LocationModel import LocationModel
+#!-*- conding: utf8 -*-
+#encoding: utf-8
+
+#encoding: utf-8
+import Connection
+import LocationModel
 
 from ThingsXLocationModel import ThingsXLocationModel
 
@@ -7,8 +11,8 @@ from ThingsXLocationModel import ThingsXLocationModel
 class ThingsXLocation(object):
 
     """
-    busca coisas que pertencem a uma localização
-    mas não foi encontrado
+    busca coisas que pertencem a uma localizacao
+    mas nao foi encontrado
     """
     def search_things_missing_by_location(self, loca_id):
         try:

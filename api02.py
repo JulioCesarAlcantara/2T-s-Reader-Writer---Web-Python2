@@ -23,10 +23,12 @@ import random
 import os
 
 from Things import Things
+from ThingsSynchronization import ThingsSynchronization
 
 from User import User
-from write_id  import start
-from reader  import startLeitura
+#from write_id  import start
+#from reader  import startLeitura
+from testeSync import testeSync
 
 array = []
 
@@ -102,7 +104,7 @@ def beforerequest():
 @app.route('/getsession')
 def getsession():
     if 'user' in session:
-        return session['name']
+        return session['token']
     return 'Not logged in!'
 
 @app.route('/dropsession')
@@ -192,10 +194,14 @@ def listLocationWriter():
 
 @app.route('/testCheck', methods=['POST'])
 def metodoTeste():
-    test=request.form.getlist('extensions')
-
-    print test[1]
-
+    thingsToSync = request.form.getlist('extensions')
+    locasToSync = request.form.getlist('locas')
+    # thingsSync = testeSync()
+    thingsSync = ThingsSynchronization()
+    i = 0
+    for thing in thingsToSync:
+        thingsSync.synchronizationThings(session['token'], locasToSync[i], thing)
+        i = i + 1
 
     return "<h1>Funcionou</h1>"
 
@@ -235,12 +241,15 @@ def synchronize():
 @app.route('/tableRead', methods=['POST'])
 def tableRead():
     arraySync = request.form.getlist('arraySync')
+    location = request.form('arraySyncLoc')
     things = Things()
     arrayThings = []
 
     for numero in arraySync:
-        arrayThings.append(things.search_things_by_num2(numero))
-    print(arrayThings)
+        coisa = things.search_things_by_num2(numero)
+        coisa.location_current.loca_id = location
+        arrayThings.append(coisa)
+
 
     #abre o json para salvar em uma lista o que ja esta gravado
     with open('sync.json') as json_data:
@@ -296,24 +305,9 @@ def thingsTableReader():
             return render_template ('/reader.html', locations=location, message="Erro de leitura")
         else:
 
-        # things = Things()
-        # texto = None
-        # array = things.search_things_actives_by_location(loca_id)
-        # arq = open('sync.json', 'w')
-        # inicio = "{\n\n\"Things\":[\n\n";
-        # arq.write(inicio);
-        # tamanho = (len(array))
-        # for thing in array:
-        #     if(tamanho == 1):
-        #         texto = json.dumps(para_dict(thing))
-        #         arq.write(texto)
-        #         tamanho = tamanho - 1
-        #     else:
-        #         texto = json.dumps(para_dict(thing))
-        #         arq.write(texto + ",\n")
-        #         tamanho = tamanho - 1
-        # arq.write("\n\n]\n}")
-             # arq.close()
+         # things = Things()
+        #  array = things.search_things_actives_by_location(loca_id)
+
             return render_template('/reader.html',locationId = loca_id, locations=location, thingsdata=next(resposta))
 
     else:

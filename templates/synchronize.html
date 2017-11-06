@@ -68,6 +68,7 @@
                {%for thing in things%}
                     <tr>
                         <td><input type="checkbox" name="extensions" class="checkthis" value="{{thing['nr_things1']}}"/></td>
+                        <input type="hidden" name="locas" value="{{thing.location_current.loca_id}}">
                         <td>{{thing.nr_things1}}</td>
                         <td>{{thing.description}}</td>
                         <td>{{thing.location.loca_room}}</td>

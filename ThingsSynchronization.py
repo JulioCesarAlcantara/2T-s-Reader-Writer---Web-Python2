@@ -1,3 +1,7 @@
+#!-*- conding: utf8 -*-
+#encoding: utf-8
+
+#encoding: utf-8
 import requests
 from Things import Things
 
@@ -73,7 +77,7 @@ class ThingsSynchronization(object):
         else:
             return 'Ocorreu um erro ao verificar se a coisa existe'
 
-    def synchronizationThings(Token, Location, nThings):
+    def synchronizationThings(self, Token, Location, nThings):
         try:
             url = "https://dg-2ts-server.herokuapp.com/"
             response = requests.get(

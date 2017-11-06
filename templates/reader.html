@@ -78,6 +78,8 @@
                         <div class="table-responsive">
                           <table name="" id="mytable" class="table table-bordred table-striped">
                                {%if thingsdata is defined%}
+
+                              <input type="hidden" name="arraySync" value="{{things['nr_things1']}}">
                                <thead>
                                    <th><center>Code</center></th>
                                    <th><center>Name</center></th>
@@ -87,7 +89,7 @@
                                     {%for things in thingsdata%}
                                         {%if locationId == things.location.loca_id%}
                                             <tr align="center">
-                                                <input type="hidden" name="arraySync" value="{{things['nr_things1']}}">
+                                                <input type="hidden" name="arraySyncLoc" value="{{locationId}}">
                                                 <td>{{things.nr_things1}}</td>
                                                 <td>{{things.description}}</td>
                                                 <td>{{things.location.loca_room}}</td>
@@ -96,7 +98,6 @@
                                         {%if locationId != things.location.loca_id %}
                                             <tr align="center">
                                                 <input type="hidden" name="arraySync" value="{{things['nr_things1']}}">
-                                                <input type="hidden" name="arraySyncLoc" value="{{locationId}}">
                                                 <td><font color="#FF0000">{{things.nr_things1}}</font></td>
                                                 <td><font color="#FF0000">{{things.description}}</font></td>
                                                 <td><font color="#FF0000">{{things.location.loca_room}}</font></td>
