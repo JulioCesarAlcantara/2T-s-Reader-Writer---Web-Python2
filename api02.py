@@ -240,7 +240,7 @@ def synchronize():
 @app.route('/tableRead', methods=['POST'])
 def tableRead():
     arraySync = request.form.getlist('arraySync')
-    location = request.form('arraySyncLoc')
+    location = request.form['arraySyncLoc']
     things = Things()
     arrayThings = []
 
