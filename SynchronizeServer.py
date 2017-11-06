@@ -16,7 +16,6 @@ def getLocations():
         response = requests.get (url + "get_locations_db/token=123")
 
         if response.ok:
-            print response.text + "\n\n"
             return response.text
         else:
             return False
@@ -42,7 +41,6 @@ def getThings():
         response = requests.get (url + "get_things_db/token=123")
 
         if response.ok:
-            print response.text + "\n\n"
             return response.text
         else:
             return False
@@ -73,7 +71,6 @@ def getThingsLocations():
         response = requests.get (url + "get_things_location_db/token=123")
 
         if response.ok:
-            print response.text + "\n\n"
             return response.text
         else:
             return False
@@ -97,7 +94,6 @@ def getUsers():
         response = requests.get (url + "get_users_db/token=123")
 
         if response.ok:
-            print response.text + "\n\n"
             return response.text
         else:
             return False
@@ -173,11 +169,11 @@ def updateBdThingsLocation():
             conn.commit ()
             print "Coisas inseridas nas localizacoes com sucesso !!"
 
-            print "Deu Certo !!!"
+            print "Banco de Dados Local Sincronizado com Sucesso !!"
         except Exception as e:
             conn.rollback()
             print(e)
-            print "Deu errado !!!"
+            print "Erro ao sincronizar. Verique sua conexao !!"
         finally:
             conn.close_connection()
 
