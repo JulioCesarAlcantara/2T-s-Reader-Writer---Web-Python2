@@ -170,14 +170,14 @@ def updateBdThingsLocation():
             print "Coisas inseridas nas localizacoes com sucesso !!"
 
             print "Banco de Dados Local Sincronizado com Sucesso !!"
+            return True
         except Exception as e:
             conn.rollback()
             print(e)
             print "Erro ao sincronizar. Verique sua conexao !!"
+            return False
         finally:
             conn.close_connection()
-
-updateBdThingsLocation()
 
 # def updateBdUsers():
 #     location = getLocations()

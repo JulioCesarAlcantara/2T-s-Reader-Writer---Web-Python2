@@ -11,24 +11,22 @@
 </head>
 <body>
 <br><br>
-    <div class="container">
-        <div class="row">
-             <center><strong><h1>Atualizando Banco de Dados Local</h1></strong></center>
-        </div>
-        <div class="row">
-            <center><img src="/static/Images/imagem2.gif" height="300" width="450" border="0" alt="Descrição do logotipo do site"></center>
-        </div>
-        {%if html is defined%}
-            {%for acao in html%}
-                <div class="row">
-                    <center><strong><h1>{{acao}}</h1></strong></center>
-                </div>
-            {%endfor%}
-        {%endif%}
-        <div class="row">
-             <center><strong><h1>2Ts Reader/Writer</h1></strong></center>
-        </div>
-    </div>
+    <form action="/load" method="post">
+        <div class="container">
+            <div class="row">
+                 <center><strong><h1>Atualizando Banco de Dados Local</h1></strong></center>
+            </div>
+            <div class="row">
+                <center><img src="/static/Images/imagem2.gif" height="300" width="450" border="0" alt="Descrição do logotipo do site"></center>
+            </div>
 
+            <div class="row">
+                 <center><strong><h1>The System is updating the local database, once finished you will be redirected !! </h1></strong></center>
+            </div>
+            <div class="row">
+                 <center><strong><h1>2Ts Reader/Writer</h1></strong></center>
+            </div>
+        </div>
+    </form>
 </body>
 </html>
