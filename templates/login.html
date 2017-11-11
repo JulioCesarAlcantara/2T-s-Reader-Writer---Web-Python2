@@ -43,25 +43,37 @@
                 <div class="col-sm-6 col-md-3 col-md-offset-4">
                     <h1 class="text-center login-title">Sign in</h1><br>
                     <div class="account-wall">
-                        <form action="login" method="post" class="form-signin">
-                            <input type="hidden" name="cmd" value="login"/>
-                            <input type="text" class="form-control" value="admin@adm.com" placeholder="Email" name="email" required autofocus><br>
-                            <input type="password" class="form-control"  value="admin" placeholder="Password" name="password" required><br>
-                            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button><br>
-                        </form>
+                        <input type="hidden" name="cmd" value="login"/>
+                        <input type="text" class="form-control" value="admin@adm.com" placeholder="Email" name="email" required autofocus><br>
+                        <input type="password" class="form-control"  value="admin" placeholder="Password" name="password" required><br>
+                        <button class="btn btn-lg btn-primary btn-block" autofocus type="submit">Log In</button><br>
+
                     </div>
-                    {%if message is defined%}
-                    <div class=' alert alert-warning alert-dismissable fade in'><strong>Warning!</strong> {{message}}</div>
-                    {%endif%}
-
-                    {%if bd is defined%}
-                    <div class=' alert alert-info alert-dismissable'><strong>Info!</strong> {{bd}}</div>
-                    {%endif%}
-
                 </div>
             </div>
         </div>
     </form>
+    <form action="/update" method="post" class="form-horizontal">
+        <div class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="col-sm-6 col-md-3 col-md-offset-4">
+                    <div class="account-wall">
+                    <input type="hidden" name="update" value="1"/>
+                    <button class="btn btn-lg btn-warning btn-block" type="submit">Update Bd Local</button><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="container text-center login-title">
+        {%if message is defined%}
+            <div class=' alert alert-warning alert-dismissable fade in'><strong>Warning!</strong> {{message}}</div>
+        {%endif%}
+
+        {%if bd is defined%}
+            <div class=' alert alert-info alert-dismissable'><strong>Info!</strong> {{bd}}</div>
+        {%endif%}
+    </div>
     <script src="{{url_for('static', filename='styles/message.js')}}"></script>
 </body>
 </html>

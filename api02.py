@@ -24,10 +24,11 @@ import os
 
 from Things import Things
 from ThingsSynchronization import ThingsSynchronization
+from SynchronizeServer import updateBdLocal
 
 from User import User
-from write_id  import start
-from reader  import startLeitura
+# from write_id  import start
+# from reader  import startLeitura
 
 array = []
 
@@ -53,11 +54,39 @@ def para_dict(obj):
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
+
 @app.route('/')
-def index():
+def login():
     if 'user' in session:
         return render_template('/inicial.html', message=session['name'])
     return render_template('/login.html')
+
+@app.route('/update', methods=['POST'])
+def updateBd():
+    valor = request.form['update']
+    print valor
+
+    with open('sync.json') as json_data:
+        data = json.load(json_data)
+        list = []
+        for thing in data['Things']:
+            list.append(thing)
+
+    if valor == '1':
+        print "Aqui 1"
+        if len(list) == 0:
+            up = updateBdLocal()
+            print up
+            if up == True:
+                return render_template('/login.html', bd="Banco de dados atualizado com sucesso !!")
+            elif up == False:
+                return render_template('/login.html', bd="Erro ao sincronizar, verifique sua conexao.")
+            else:
+                return render_template ('/login.html', message=up)
+        elif len(list) >= 1 :
+            return render_template ('/login.html', message="Vc tem coisas para sincronizar. Sincronize-as primeiro para atualizar o bd.")
+    else:
+        return render_template('/login.html', message="Nao foi possivel atualizar o bd local")
 
 
 @app.route('/post_login', methods=['POST'])
@@ -212,8 +241,8 @@ def writerInTag():
     location = things.search_locations ()
 
     # yield render_template('writer.html', tagAtiv = 'Aproxime a etiqueta para active')
-    tag = start (str(numero))
-    # tag = True
+    # tag = start (str(numero))
+    tag = True
 
     if tag == True:
         things = Things ()
@@ -291,8 +320,8 @@ def thingsTableReader():
         things = Things ()
         location = things.search_locations ()
 
-        resposta = startLeitura()
-
+        # resposta = startLeitura()
+        resposta = True
 
         print "RESPOSTA ----"
         print resposta

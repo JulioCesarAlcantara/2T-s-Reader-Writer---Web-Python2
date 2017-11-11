@@ -10,10 +10,12 @@ from Connection import Connection
 #     return json.dumps(para_dict(location.get_all_locations_db()))
 
 def getLocations():
-
     try:
+        print "Aqui 1"
         url = "https://dg-2ts-server.herokuapp.com/"
+        print "Aqui 3"
         response = requests.get (url + "get_locations_db/token=123")
+        print "Aqui 3"
 
         if response.ok:
             return response.text
@@ -91,7 +93,7 @@ def getUsers():
 
     try:
         url = "https://dg-2ts-server.herokuapp.com/"
-        response = requests.get (url + "get_users_db/token=123")
+        response = requests.get(url + "get_users_db/token=123")
 
         if response.ok:
             return response.text
@@ -101,16 +103,17 @@ def getUsers():
         print ("Erro no Servidor")
         return 0
 
-def updateBdThingsLocation():
+def updateBdLocal():
     location = getLocations()
     users = getUsers()
     things = getThings()
     thingsLocation = getThingsLocations()
 
-    if thingsLocation == False:
-        print "Erro ao buscar dados de coisas na localizacao. Contate o analista"
-    elif thingsLocation == 0:
-        print "Erro no servidor"
+    if thingsLocation == False or things == False or users == False or location == False:
+        return "Erro de conexao com o servidor. Verifique sua conexao."
+    elif thingsLocation == 0 or things == 0 or users == 0 or location == 0:
+        return "Erro no servidor. Contate o suporte"
+
     else:
         try:
             print "Deletando tabela de bens x localizacao ..."
@@ -173,66 +176,7 @@ def updateBdThingsLocation():
             return True
         except Exception as e:
             conn.rollback()
-            print(e)
             print "Erro ao sincronizar. Verique sua conexao !!"
             return False
         finally:
             conn.close_connection()
-
-# def updateBdUsers():
-#     location = getLocations()
-#     users = getUsers()
-#     things = getThings()
-#
-#     if users == False:
-#         print "Erro ao buscar dados de usuarios no servidor. Contate o analista"
-#     elif users == 0:
-#         print "Erro no servidor"
-#     else:
-#         try:
-#             sql = "DELETE FROM `usuarios`"
-#             conn = Connection()
-#             conn.execute_sql(sql)
-#             conn.commit()
-#
-#             sql = str(users)
-#             conn = Connection ()
-#             conn.execute_sql (sql)
-#             conn.commit ()
-#
-#             print "Deu Certo !!!"
-#         except Exception as e:
-#             conn.rollback()
-#             print(e)
-#             print "Deu errado !!!"
-#         finally:
-#             conn.close_connection()
-#
-# def updateBdUsers():
-#     location = getLocations()
-#     users = getUsers()
-#     things = getThings()
-#
-#     if users == False:
-#         print "Erro ao buscar dados de usuarios no servidor. Contate o analista"
-#     elif users == 0:
-#         print "Erro no servidor"
-#     else:
-#         try:
-#             sql = "DELETE FROM `usuarios`"
-#             conn = Connection()
-#             conn.execute_sql(sql)
-#             conn.commit()
-#
-#             sql = str(users)
-#             conn = Connection ()
-#             conn.execute_sql (sql)
-#             conn.commit ()
-#
-#             print "Deu Certo !!!"
-#         except Exception as e:
-#             conn.rollback()
-#             print(e)
-#             print "Deu errado !!!"
-#         finally:
-#             conn.close_connection()
