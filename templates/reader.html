@@ -91,7 +91,7 @@
                                </thead>
                                <tbody>
                                     {%for things in thingsdata%}
-                                        {%if locationId == things.location.loca_id%}
+                                        {%if locationId == things.loca_id%}
                                             <tr align="center">
                                                 <input type="hidden" name="arraySync" value="{{things['nr_things1']}}">
                                                 <td>{{things.nr_things1}}</td>
