@@ -96,7 +96,7 @@
                                                 <input type="hidden" name="arraySync" value="{{things['nr_things1']}}">
                                                 <td>{{things.nr_things1}}</td>
                                                 <td>{{things.description}}</td>
-                                                <td>{{things.location.loca_room}}</td>
+                                                <td>{{things.loca_room}}</td>
                                             </tr>
                                         {%endif%}
                                         {%if locationId != things.loca_id %}
@@ -104,7 +104,7 @@
                                                 <input type="hidden" name="arraySync" value="{{things['nr_things1']}}">
                                                 <td><font color="#FF0000">{{things.nr_things1}}</font></td>
                                                 <td><font color="#FF0000">{{things.description}}</font></td>
-                                                <td><font color="#FF0000">{{things.location.loca_room}}</font></td>
+                                                <td><font color="#FF0000">{{things.loca_room}}</font></td>
                                             </tr>
                                         {%endif%}
                                     {%endfor%}
