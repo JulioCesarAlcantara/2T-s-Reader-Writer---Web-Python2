@@ -319,17 +319,20 @@ def thingsTableReader():
         things = Things ()
         location = things.search_locations ()
 
-        resposta = startLeitura()
+        for i in range(0,2):
+            resposta = startLeitura()
         # resposta = True
 
         print "RESPOSTA ----"
-        print next(resposta)
+        print resposta
 
 
-        if next(resposta) == False:
+        if False in resposta:
             return render_template ('/reader.html', locations=location, message="Error saving file.")
-        elif next(resposta) == "Tag already read !!":
+        elif 0 in resposta:
             return render_template ('/reader.html', locations=location, message="Erro de leitura")
+        elif 'ERRO' in resposta:
+            return render_template ('/reader.html', locations=location, message="Erro na busca do objeto. Tente novamente !")
         else:
 
          # things = Things()

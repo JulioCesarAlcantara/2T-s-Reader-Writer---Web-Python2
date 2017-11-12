@@ -74,14 +74,18 @@ def startLeitura():
 
 
 
-            things = Things()
 
-            # return False
-            # for i in array:
-            # if numero not in i.nr_things1 :
-            array.append(things.search_things_by_num2 (numero))
-            for i in range(0, len(array)):
-                print array[i]
+            things = Things()
+            a = things.search_things_by_num2 (numero)
+
+            if a == False:
+                return 0
+            elif a == "ERRO":
+                return 'ERRO'
+            else:
+                array.append(things.search_things_by_num2 (numero))
+
+
 
             emiteSomOk ()
                 # else:
@@ -89,7 +93,7 @@ def startLeitura():
                     # yield "Tag already read !!"
             MIFAREReader.MFRC522_StopCrypto1 ()
 
-            yield array
+            return array
 
 
 
