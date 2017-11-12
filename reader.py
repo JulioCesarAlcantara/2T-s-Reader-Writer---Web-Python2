@@ -84,8 +84,8 @@ def startLeitura():
             elif a == "ERRO":
                 return 'ERRO'
             else:
-                array.append(things.search_things_by_num2 (numero))
-
+                # array.append(things.search_things_by_num2 (numero))
+                return things.search_things_by_num2 (numero)
 
 
             emiteSomOk ()
@@ -95,7 +95,7 @@ def startLeitura():
             MIFAREReader.MFRC522_StopCrypto1 ()
 
 
-            return array
+
 
 
 

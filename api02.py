@@ -318,10 +318,9 @@ def thingsTableReader():
     if loca_id != "0":
         things = Things ()
         location = things.search_locations ()
-        a = True
-        i = 0
+        resposta = []
         for i in range(0,5):
-            resposta = startLeitura()
+            resposta.append(startLeitura())
             print "leitura: ",i
             # resposta = True
 
