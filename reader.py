@@ -31,7 +31,8 @@ def startLeitura():
     MIFAREReader = MFRC522.MFRC522()
     array = []
     # This loop keeps checking for chips. If one is near it will get the UID and authenticate
-    while continue_reading:
+    # while continue_reading:
+    for i in range(0,2):
         print "ok 1"
         (status, TagType) = MIFAREReader.MFRC522_Request (MIFAREReader.PICC_REQIDL)
         print "ok 2"
@@ -93,7 +94,8 @@ def startLeitura():
                     # yield "Tag already read !!"
             MIFAREReader.MFRC522_StopCrypto1 ()
 
-            return array
+
+    return array
 
 
 
