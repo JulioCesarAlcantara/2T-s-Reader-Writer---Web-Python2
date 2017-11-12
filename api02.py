@@ -27,8 +27,8 @@ from ThingsSynchronization import ThingsSynchronization
 from SynchronizeServer import updateBdLocal
 
 from User import User
-# from write_id  import start
-# from reader  import startLeitura
+from write_id  import start
+from reader  import startLeitura
 
 array = []
 
@@ -241,8 +241,8 @@ def writerInTag():
     location = things.search_locations ()
 
     # yield render_template('writer.html', tagAtiv = 'Aproxime a etiqueta para active')
-    # tag = start (str(numero))
-    tag = True
+    tag = start (str(numero))
+    # tag = True
 
     if tag == True:
         things = Things ()
@@ -315,28 +315,30 @@ def tableRead():
 def thingsTableReader():
 
     loca_id = request.form['location1']
+    resposta = []
 
     if loca_id != "0":
         things = Things ()
         location = things.search_locations ()
 
-        # resposta = startLeitura()
-        resposta = True
+        for i in range(0,2):
+            resposta.append(startLeitura())
+            # resposta = True
 
-        print "RESPOSTA ----"
-        print resposta
+            print "RESPOSTA ----"
+            print resposta
 
 
-        if next(resposta) == False:
+        if resposta == False:
             return render_template ('/reader.html', locations=location, message="Error saving file.")
-        elif next(resposta) == "Tag already read !!":
+        elif resposta == "Tag already read !!":
             return render_template ('/reader.html', locations=location, message="Erro de leitura")
         else:
 
          # things = Things()
         #  array = things.search_things_actives_by_location(loca_id)
 
-            return render_template('/reader.html',locationId = loca_id, locations=location, thingsdata=next(resposta))
+            return render_template('/reader.html',locationId = loca_id, locations=location, thingsdata=resposta)
 
     else:
         msg = "Please, Select a Location to Read."
