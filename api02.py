@@ -319,9 +319,10 @@ def thingsTableReader():
         things = Things ()
         location = things.search_locations ()
 
-        # for i in range(0,2):
-        resposta = startLeitura()
-    # resposta = True
+        while True:
+            resposta = startLeitura()
+            # resposta = True
+            continue
 
         print "RESPOSTA ----"
         print resposta
@@ -329,7 +330,7 @@ def thingsTableReader():
 
         if False in resposta:
             return render_template ('/reader.html', locations=location, message="Error saving file.")
-        elif 0 in resposta:
+        elif '0' in resposta:
             return render_template ('/reader.html', locations=location, message="Erro de leitura")
         elif 'ERRO' in resposta:
             return render_template ('/reader.html', locations=location, message="Erro na busca do objeto. Tente novamente !")
@@ -337,7 +338,7 @@ def thingsTableReader():
 
          # things = Things()
         #  array = things.search_things_actives_by_location(loca_id)
-            
+
             return render_template('/reader.html',locationId = loca_id, locations=location, thingsdata=resposta)
 
 
