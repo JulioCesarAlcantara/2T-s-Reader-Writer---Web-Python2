@@ -87,7 +87,6 @@ def startLeitura():
             MIFAREReader.MFRC522_StopCrypto1 ()
 
             yield array
-            continue
 
 
 

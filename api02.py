@@ -321,7 +321,7 @@ def thingsTableReader():
         location = things.search_locations ()
 
         resposta = startLeitura()
-            # resposta = True
+        # resposta = True
 
         print "RESPOSTA ----"
         print next(resposta)
