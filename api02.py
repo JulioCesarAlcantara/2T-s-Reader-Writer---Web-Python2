@@ -320,13 +320,11 @@ def thingsTableReader():
         location = things.search_locations ()
         a = True
         i = 0
-        while a:
+        for i in range(0,5):
             resposta = startLeitura()
+            print "leitura: ",i
             # resposta = True
-            i += 1
 
-            if i == 5:
-                pass
 
         print "RESPOSTA ----"
         print resposta
