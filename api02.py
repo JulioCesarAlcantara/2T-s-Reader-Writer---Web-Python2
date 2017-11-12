@@ -338,7 +338,7 @@ def thingsTableReader():
          # things = Things()
         #  array = things.search_things_actives_by_location(loca_id)
 
-            return render_template('/reader.html',locationId = loca_id, locations=location, thingsdata=next(resposta))
+            return render_template('/reader.html',locationId = loca_id, locations=location, thingsdata=resposta)
 
     else:
         msg = "Please, Select a Location to Read."
