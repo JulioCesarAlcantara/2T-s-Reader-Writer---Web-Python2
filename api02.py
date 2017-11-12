@@ -318,11 +318,15 @@ def thingsTableReader():
     if loca_id != "0":
         things = Things ()
         location = things.search_locations ()
-
-        while True:
+        a = True
+        i = 0
+        while a:
             resposta = startLeitura()
             # resposta = True
-            continue
+            i += 1
+
+            if i == 5:
+                return 
 
         print "RESPOSTA ----"
         print resposta
