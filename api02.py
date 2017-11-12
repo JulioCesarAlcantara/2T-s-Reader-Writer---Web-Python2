@@ -315,16 +315,16 @@ def tableRead():
 def thingsTableReader():
 
     loca_id = request.form['location1']
-
+    resposta = []
     if loca_id != "0":
         things = Things ()
         location = things.search_locations ()
 
-        resposta = startLeitura()
+        resposta.append(startLeitura())
         # resposta = True
 
         print "RESPOSTA ----"
-        print next(resposta)
+        print resposta
 
 
         if next(resposta) == False:
