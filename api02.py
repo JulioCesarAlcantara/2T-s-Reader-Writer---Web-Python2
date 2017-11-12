@@ -323,7 +323,7 @@ def thingsTableReader():
         # resposta = True
 
         print "RESPOSTA ----"
-        print resposta
+        print next(resposta)
 
 
         if next(resposta) == False:
