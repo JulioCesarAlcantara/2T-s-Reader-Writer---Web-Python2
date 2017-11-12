@@ -323,22 +323,23 @@ def thingsTableReader():
             resposta = startLeitura()
         # resposta = True
 
-        print "RESPOSTA ----"
-        print resposta
+            print "RESPOSTA ----"
+            print resposta
 
 
-        if False in resposta:
-            return render_template ('/reader.html', locations=location, message="Error saving file.")
-        elif 0 in resposta:
-            return render_template ('/reader.html', locations=location, message="Erro de leitura")
-        elif 'ERRO' in resposta:
-            return render_template ('/reader.html', locations=location, message="Erro na busca do objeto. Tente novamente !")
-        else:
+            if False in resposta:
+                return render_template ('/reader.html', locations=location, message="Error saving file.")
+            elif 0 in resposta:
+                return render_template ('/reader.html', locations=location, message="Erro de leitura")
+            elif 'ERRO' in resposta:
+                return render_template ('/reader.html', locations=location, message="Erro na busca do objeto. Tente novamente !")
+            else:
 
-         # things = Things()
-        #  array = things.search_things_actives_by_location(loca_id)
+             # things = Things()
+            #  array = things.search_things_actives_by_location(loca_id)
+                pass
+                return render_template('/reader.html',locationId = loca_id, locations=location, thingsdata=resposta)
 
-            return render_template('/reader.html',locationId = loca_id, locations=location, thingsdata=resposta)
 
     else:
         msg = "Please, Select a Location to Read."
