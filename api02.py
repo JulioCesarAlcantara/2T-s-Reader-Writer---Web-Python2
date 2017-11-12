@@ -332,7 +332,7 @@ def thingsTableReader():
         if False in resposta:
             return render_template ('/reader.html', locations=location, message="Error saving file.")
         elif '0' in resposta:
-            return render_template ('/reader.html', locations=location, message="Erro de leitura")
+            return render_template ('/reader.html', locations=location, message="Erro de leitura. Tente Novamente!")
         elif 'ERRO' in resposta:
             return render_template ('/reader.html', locations=location, message="Erro na busca do objeto. Tente novamente !")
         else:

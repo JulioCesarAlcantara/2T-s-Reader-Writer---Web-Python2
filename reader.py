@@ -85,10 +85,11 @@ def startLeitura():
                 return 'ERRO'
             else:
                 # array.append(things.search_things_by_num2 (numero))
+                emiteSomOk ()
                 return things.search_things_by_num2 (numero)
 
 
-            emiteSomOk ()
+
                 # else:
                 #     emiteSomErro()
                     # yield "Tag already read !!"
