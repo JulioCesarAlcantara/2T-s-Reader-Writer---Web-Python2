@@ -4,6 +4,7 @@
 #!-*- conding: utf8 -*-
 
 import sys
+from distutils.extension import read_setup_file
 
 from pip.utils import encoding
 #encoding: utf-8
@@ -377,11 +378,11 @@ def thingsTableReader():
         elif 'ERRO' in resposta:
             return render_template ('/reader.html', locations=location, message="Erro na busca do objeto. Tente novamente !")
         else:
+            #
+            # things = Things()
+            # array = things.search_things_actives_by_location(loca_id)
 
-            things = Things()
-            array = things.search_things_actives_by_location(loca_id)
-
-            return render_template('/reader.html',locationId = loca_id, locations=location, thingsdata=array)
+            return render_template('/reader.html',locationId = loca_id, locations=location, thingsdata=resposta)
 
 
     else:
