@@ -88,11 +88,15 @@ class ThingsSynchronization(object):
                 try:
                     if data["response"] == None:
                         print("Aqui")
+                        return False
                     else:
                         print(data["response"])
+                        return True
                 except Exception as e:
                     u = ThingsModel(**data)
                     print (u.token)
+                    return False
 
         except Exception as e:
             print ("Erro no Servidor")
+            return False

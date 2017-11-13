@@ -43,21 +43,19 @@
         <br>
     </div>
 </div>
-<!-- Adicionar o form para sincronização -->
 
 <div class="container" align="center">
         <div class="row text-center">
             <h1><b>Synchronize</b></h1>
         </div>
         <br>
-            <!--{%if message is defined%}
-            <div class=' alert alert-warning'><strong>Warning!</strong> {{message}}</div>
+            {%if msg is defined%}
+            <div class=' alert alert-info alert-dismissable fade in'>{{msg}}</div>
+            {%endif%}
+            {%if msgErro is defined%}
+            <div class=' alert alert-warning'><strong>Warning!</strong> {{msgErro}}</div>
             {%endif%}
 
-            {%if texto is defined%}
-            <div class=' alert alert-info alert-dismissable fade in'><strong>Info!</strong> {{texto}}</div>
-            {%endif%}
-            -->
 <form action="testCheck" method="post">
       <div class="col-md-12">
          <div class="table-responsive">
@@ -68,18 +66,22 @@
                    <th><center>Name</center></th>
                    <th><center>Location</center></th>
                </thead>
+               {%if things is defined%}
 
                <tbody>
                {%for thing in things%}
                     <tr>
                         <td><input type="checkbox" name="extensions" class="checkthis" value="{{thing['nr_things1']}}"/></td>
-                        <input type="hidden" name="locas" value="{{thing.location_current.loca_id}}">
+                        <input type="hidden" name="locas{{thing['nr_things1']}}" value="{{thing['location_current']['loca_id']}}">
                         <td>{{thing.nr_things1}}</td>
                         <td>{{thing.description}}</td>
                         <td>{{thing.location.loca_room}}</td>
+                        <td>{{thing.location_current.loca_room}}</td>
 
                     </tr>
+               <input type="hidden" name="listaDasCoisas" value="{{thing['nr_things1']}}"/>
                {%endfor%}
+               {%endif%}
 
                 </tbody>
             </table>

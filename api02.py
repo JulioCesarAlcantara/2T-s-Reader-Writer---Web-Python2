@@ -16,13 +16,14 @@ import json
 # from ThingsManager.Things import Things
 # from ThingsManager.ThingsXLocation import ThingsXLocation
 # import User
-from werkzeug.utils import redirect
+from werkzeug.utils import redirect, html
 # from Classes.write_id import writerTag
 import string
 import random
 import os
 
 from Things import Things
+from ThingsModel import ThingsModel
 from ThingsSynchronization import ThingsSynchronization
 from SynchronizeServer import updateBdLocal
 
@@ -223,15 +224,40 @@ def listLocationWriter():
 @app.route('/testCheck', methods=['POST'])
 def metodoTeste():
     thingsToSync = request.form.getlist('extensions')
-    locasToSync = request.form.getlist('locas')
-    # thingsSync = testeSync()
+    todasCoisas = request.form.getlist('listaDasCoisas')
     thingsSync = ThingsSynchronization()
     i = 0
     for thing in thingsToSync:
-        thingsSync.synchronizationThings(session['token'], locasToSync[i], thing)
+        resp = thingsSync.synchronizationThings(session['token'], request.form['locas'+thing], thing)
         i = i + 1
 
-    return "<h1>Funcionou</h1>"
+    if resp == True:
+        list3 = []
+        thingsObject = Things()
+        for numero in todasCoisas:
+           if numero not in thingsToSync:
+            list3.append(thingsObject.search_things_by_num2(numero))
+
+        arq = open('sync.json', 'w')
+        inicio = "{\n\n\"Things\":[\n\n";
+        arq.write(inicio);
+
+        tamanho = (len(list3))
+        for coisa in list3:
+            if (tamanho == 1):
+                texto = json.dumps(para_dict(coisa))
+                arq.write(texto)
+                tamanho = tamanho - 1
+            else:
+                texto = json.dumps(para_dict(coisa))
+                arq.write(texto + ",\n")
+                tamanho = tamanho - 1
+        arq.write("\n\n]\n}")
+        arq.close()
+
+        return render_template('/synchronize.html', msg="Successfully Synchronized!")
+    else:
+        return render_template('/synchronize.html', msgErro="Something wrong happened, please try again later.")
 
 @app.route('/writeTag', methods=['POST'])
 def writerInTag():
@@ -260,11 +286,24 @@ def writerInTag():
 def synchronize():
     with open('sync.json') as json_data:
         data = json.load(json_data)
+        print("-------------------------------")
+        print(data)
         list = []
+        listModelThings = []
         for thing in data['Things']:
-            list.append(thing)
 
-    return render_template ('/synchronize.html', things=list)
+            texto = (para_dict(thing))
+            list.append(texto)
+            # data = texto
+            # print(data['description'])
+            # things = ThingsModel (data)
+            # listModelThings.append(things)
+
+
+    if len(list) == 0:
+        return render_template('/synchronize.html', msg="There's nothing to synchronize.")
+    else:
+        return render_template ('/synchronize.html', things=list)
 
 @app.route('/tableRead', methods=['POST'])
 def tableRead():
@@ -291,10 +330,12 @@ def tableRead():
     inicio = "{\n\n\"Things\":[\n\n";
     arq.write(inicio);
 
-    #insere no novo arquivo os antigos
-    for antigo in list:
-        text = json.dumps(para_dict(antigo))
-        arq.write(text +",\n")
+
+    if (len(list) != 0):
+        # insere no novo arquivo os antigos
+        for antigo in list:
+            text = json.dumps(para_dict(antigo))
+            arq.write(text + ",\n")
 
     tamanho = (len(arrayThings))
     for thing in arrayThings:
@@ -322,7 +363,7 @@ def thingsTableReader():
         for i in range(0,5):
             resposta.append(startLeitura())
             print "leitura: ",i
-            # resposta = True
+            # resposta.append(True)
 
 
         print "RESPOSTA ----"
@@ -337,10 +378,10 @@ def thingsTableReader():
             return render_template ('/reader.html', locations=location, message="Erro na busca do objeto. Tente novamente !")
         else:
 
-         # things = Things()
-        #  array = things.search_things_actives_by_location(loca_id)
+            things = Things()
+            array = things.search_things_actives_by_location(loca_id)
 
-            return render_template('/reader.html',locationId = loca_id, locations=location, thingsdata=resposta)
+            return render_template('/reader.html',locationId = loca_id, locations=location, thingsdata=array)
 
 
     else:
