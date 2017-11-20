@@ -222,16 +222,43 @@ def listLocationWriter():
 
     return render_template ('/writer.html', locations=location)
 
+def activeThings(Token, nThings):
+    try:
+        url = "https://dg-2ts-server.herokuapp.com/"
+        response = requests.get (url + "active_thing_by_num/token="+ Token + "&num=" + nThings)
+        data = response.json ()
+        print data
+
+        if response.ok:
+            try:
+                if data["response"] == None:
+                    print("Aqui")
+                    return 0
+                else:
+                    print(data['response'])
+                    return True
+            except Exception as e:
+                print "Exception: ",e
+                return 'Erro'
+
+    except Exception as e:
+        print "Erro no Servidor", e
+        return False
+
 @app.route('/testCheck', methods=['POST'])
 def metodoTeste():
     thingsToSync = request.form.getlist('extensions')
     todasCoisas = request.form.getlist('listaDasCoisas')
     thingsSync = ThingsSynchronization()
     things = Things()
-    i = 0
     for thing in thingsToSync:
-        resp = thingsSync.synchronizationThings(session['token'], request.form['locas'+thing], thing)
-        i = i + 1
+        active = activeThings(session['token'], thing)
+        if active == True:
+            resp = thingsSync.synchronizationThings(session['token'], request.form['locas'+thing], thing)
+        elif active == 0:
+            return render_template('/synchronize.html', msgErro="No Thing has been found to synchronize.")
+        else:
+            return render_template('/synchronize.html', msg="Server Connection Error.")
 
     if resp == True:
         list3 = []
