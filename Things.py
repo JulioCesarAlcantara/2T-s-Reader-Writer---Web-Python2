@@ -364,6 +364,24 @@ class Things(ThingsModel):
         finally:
             conn.close_connection()
 
+    def search_location_by_id(self, id):
+        try:
+            sql = "SELECT * FROM localizacao WHERE loca_id ="+str(id);
+            conn = Connection()
+            cursor = conn.execute_sql(sql)
+            if cursor.rowcount == 0:
+                return False
+            data = cursor.fetchone()
+
+            location = LocationModel(loca_id=str(data[0]), loca_room=data[1])
+
+            return location
+        except Exception as e:
+            print(e)
+            return 'ERRO'
+        finally:
+            conn.close_connection()
+
     def update_thing(self, code_things, situation, state, note):
         try:
             sql = "UPDATE patr_bens SET pabe_situacao = '" + str(situation) + "', pabe_estado = '" + str(

@@ -30,8 +30,8 @@ from ThingsSynchronization import ThingsSynchronization
 from SynchronizeServer import updateBdLocal
 
 from User import User
-# from write_id  import start
-# from reader  import startLeitura
+from write_id  import start
+from reader  import startLeitura
 
 array = []
 
@@ -227,6 +227,7 @@ def metodoTeste():
     thingsToSync = request.form.getlist('extensions')
     todasCoisas = request.form.getlist('listaDasCoisas')
     thingsSync = ThingsSynchronization()
+    things = Things()
     i = 0
     for thing in thingsToSync:
         resp = thingsSync.synchronizationThings(session['token'], request.form['locas'+thing], thing)
@@ -237,7 +238,10 @@ def metodoTeste():
         thingsObject = Things()
         for numero in todasCoisas:
            if numero not in thingsToSync:
-            list3.append(thingsObject.search_things_by_num2(numero))
+            thing = thingsObject.search_things_by_num2(numero)
+            thing.location_current = things.search_location_by_id(request.form['locas'+numero])
+            list3.append(thing)
+
 
         arq = open('sync.json', 'w')
         inicio = "{\n\n\"Things\":[\n\n";
@@ -344,6 +348,7 @@ def tableRead():
     for numero in arraySync:
         coisa = things.search_things_by_num2(numero)
         coisa.location_current.loca_id = location
+        coisa.location_current.loca_room = things.search_location_by_id(location).loca_room
         arrayThings.append(coisa)
 
 
@@ -390,9 +395,9 @@ def thingsTableReader():
         location = things.search_locations ()
         resposta = []
         for i in range(0,5):
-            # resposta.append(startLeitura())
+            resposta.append(startLeitura())
             print "leitura: ",i
-            resposta.append(True)
+            # resposta.append(True)
 
 
         print "RESPOSTA ----"
