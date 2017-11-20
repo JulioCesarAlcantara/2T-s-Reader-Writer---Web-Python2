@@ -22,6 +22,7 @@ from werkzeug.utils import redirect, html
 import string
 import random
 import os
+import requests
 
 from Things import Things
 from ThingsModel import ThingsModel
@@ -29,8 +30,8 @@ from ThingsSynchronization import ThingsSynchronization
 from SynchronizeServer import updateBdLocal
 
 from User import User
-from write_id  import start
-from reader  import startLeitura
+# from write_id  import start
+# from reader  import startLeitura
 
 array = []
 
@@ -75,7 +76,6 @@ def updateBd():
             list.append(thing)
 
     if valor == '1':
-        print "Aqui 1"
         if len(list) == 0:
             up = updateBdLocal()
             print up
@@ -260,28 +260,56 @@ def metodoTeste():
     else:
         return render_template('/synchronize.html', msgErro="Something wrong happened, please try again later.")
 
+
+def activeThings(Token, nThings):
+    try:
+        url = "https://dg-2ts-server.herokuapp.com/"
+        response = requests.get (url + "active_thing_by_num/token="+ Token + "&num=" + nThings)
+        data = response.json ()
+        print data
+
+        if response.ok:
+            try:
+                if data["response"] == None:
+                    print("Aqui")
+                    return 0
+                else:
+                    print(data['response'])
+                    return True
+            except Exception as e:
+                print "Exception: ",e
+                return 'Erro'
+
+    except Exception as e:
+        print "Erro no Servidor", e
+        return False
+
 @app.route('/writeTag', methods=['POST'])
 def writerInTag():
     numero = request.form['radioSelected']
 
     things = Things ()
     location = things.search_locations ()
+    active = things.active_things_by_num1(numero)
 
-    # yield render_template('writer.html', tagAtiv = 'Aproxime a etiqueta para active')
-    tag = start (str(numero))
-    # tag = True
+    if active == True:
+        # yield render_template('writer.html', tagAtiv = 'Aproxime a etiqueta para active')
+        # tag = start (str(numero))
+        tag = True
 
-    if tag == True:
-        things = Things ()
-        exits = things.active_things_by_num1(numero)
+        if tag == True:
+            things = Things ()
+            exits = things.active_things_by_num1(numero)
 
-        if exits == True:
-            return render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
+            if exits == True:
+                return render_template ('/writer.html', msg="Tag Activated Successfully !!", locations=location)
+            else:
+                return render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
+
         else:
-            return render_template ('/writer.html', erro="Tag Activation Error !!", locations=location)
-
+            return render_template ('/writer.html', erro="Could not Activate Tag. Contact the Analyst!", locations=location)
     else:
-        return render_template ('/writer.html', erro="Could not Activate Tag. Contact the Analyst!", locations=location)
+        return render_template ('/writer.html', erro="Error Activating Tag in local database !", locations=location)
 
 @app.route('/synchronize', methods=['POST'])
 def synchronize():
@@ -362,9 +390,9 @@ def thingsTableReader():
         location = things.search_locations ()
         resposta = []
         for i in range(0,5):
-            resposta.append(startLeitura())
+            # resposta.append(startLeitura())
             print "leitura: ",i
-            # resposta.append(True)
+            resposta.append(True)
 
 
         print "RESPOSTA ----"
@@ -379,8 +407,8 @@ def thingsTableReader():
             return render_template ('/reader.html', locations=location, message="Erro na busca do objeto. Tente novamente !")
         else:
             #
-            # things = Things()
-            # array = things.search_things_actives_by_location(loca_id)
+            things = Things()
+            array = things.search_things_actives_by_location(loca_id)
 
             return render_template('/reader.html',locationId = loca_id, locations=location, thingsdata=resposta)
 
