@@ -325,8 +325,8 @@ def writerInTag():
 
     if active == True:
         # yield render_template('writer.html', tagAtiv = 'Aproxime a etiqueta para active')
-        # tag = start (str(numero))
-        tag = True
+        tag = start (str(numero))
+        # tag = True
 
         if tag == True:
             things = Things ()
@@ -423,7 +423,7 @@ def thingsTableReader():
         resposta = []
         for i in range(0,5):
             resposta.append(startLeitura())
-            print "leitura: ",i
+            # print "leitura: ",i
             # resposta.append(True)
 
 
@@ -439,8 +439,8 @@ def thingsTableReader():
             return render_template ('/reader.html', locations=location, message="Erro na busca do objeto. Tente novamente !")
         else:
             #
-            things = Things()
-            array = things.search_things_actives_by_location(loca_id)
+            # things = Things()
+            # array = things.search_things_actives_by_location(loca_id)
 
             return render_template('/reader.html',locationId = loca_id, locations=location, thingsdata=resposta)
 
